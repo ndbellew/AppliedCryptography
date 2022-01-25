@@ -1,0 +1,24 @@
+# Homework 1 CS5920 Spring 2022
+
+> Nathan Bellew
+
+## Problem 1 CIA Triad
+
+a. With an automated teller machine a user is able to provide information to the machine which will connect to their bank in order to transfer funds. In doing so this process uses Confidentiality by encrypting data sent from an ATM maintaining that the users PIN is safe. The use of a PIN here allows for the Integrity of the user's bank account information, the funds allotted in the account cannot be changed unless the user has both the card and PIN. An ATM also extends the availability of the banking network for the individual, by allowing a larger network of banking machines, the user has more availability to the banking services. The most important piece of the ATM is confidentiality, limiting access to funds only if the user has both a bank card that is acceptable and a PIN number that matches. These two pieces of information can be stolen and if confidentiality was not used by the system, any user of any bank could be compromised at any time. Further Integrity is the next important piece of the Triad, because the funds of a user's personal bank account should not be accessed by any other than the user. Maintaining integrity of both the data being transferred as well as the amount of funds being requested is a crucial part of the banking system. While Availability is last, the need for funds using an ATM is at most a convenience and can be solved by using a normal teller.
+
+b. A telephone switching system that routes calls through a switching network needs to focus mostly on integrity. Integrity in telephone network would ensure that the caller always reaches the correct telephone number and this number cannot be switched to a different telephone. By ensuring Integrity in a telephone connection, the user's connection cannot be interfered with and neither the caller nor recipient's current number change. The second most important piece of the triad is confidentiality, this ensures that the conversation held between both callers is kept secret and encrypted so that if any important information is shared, it is only shared between the two. Availability ensures that the call is always maintained and both callers are able to adequately understand each other, this can be a security issue if the call pertains to some important information such as a classified call between the Air Force and the Navy. Availability does not affect security in the same way as a lack of integrity would, a lack of integrity could allow for the telephone call to become hijacked and the caller may be connected with another source all together. I argue that it is more important than Confidentiality because if the destination call is changed or modified in such a way as to add another person, then the need for Confidentiality would no longer matter, as all the information would be shared decrypted to the new recipient.
+
+c. Any time security relates to a device that is needed for personal health, Availability is almost always the most important factor. The number one goal in security is to preserve and maintain human life, any time there is a medical device that requires an emergency response, availability is crucial. Availability is used to ensure that the piece of software or hardware is always accessible to the user, which for a medical device needs to be at any time the user may need it. The second and almost as important piece of the triad is integrity, because this is a medical device the data is incredibly important to the health of the user. If any piece is modified it could effect the output of the medical device which could have negative or even deadly consequences against the user. Confidentiality is also important to medical devices, the ability to connect to a device which uses a remote programmer to perform treatment settings should always have strong confidentiality. Without confidentiality, the medical devices could be easily accessed by other users there these other users can take full control of the system.
+
+## Problem 2 Security News
+
+> Read the news about a security incident. Identify which of the confidentiality, integrity, availability, authenticity, and accountability are relevant, indicate the degree of importance, and explain why. Cite the news source and have your answer in a couple paragraphs including one paragraph to summarize and explain the security incident and another paragraph to discuss the CIA triad and authenticity and accountability.
+
+https://therecord-media.cdn.ampproject.org/c/s/therecord.media/new-moonbounce-uefi-bootkit-cant-be-removed-by-replacing-the-hard-drive/amp/ - from John 
+https://securelist.com/moonbounce-the-dark-side-of-uefi-firmware/105468/ - sited in article above
+
+
+Par 1 The incident - MoonBounce what is it?
+
+Par 2 Security Triad - What effect does this have on us?
+
