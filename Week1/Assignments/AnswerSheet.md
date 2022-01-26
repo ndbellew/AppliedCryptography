@@ -21,3 +21,27 @@ https://securelist.com/moonbounce-the-dark-side-of-uefi-firmware/105468/ - sited
 Par 1 The incident - MoonBounce what is it?
 
 Par 2 Security Triad - What effect does this have on us?
+
+## Problem 3
+
+## Problem 4. Playfair Cipher
+A. 
+    Message: 
+    Attend crypto class and stay healthy
+    Step 1 
+        At te nd cr yp to cl as sa nd st ay he al th yq
+    Step 2
+        Kp ok lg fp ar op di sy ys lg kq sk ob si on sr
+    Result
+        **Kpoklg fparop disyy slg kqsk obsionsr**
+B. 
+    Message:
+        easykey
+    step 1
+        ea sy ke yq
+    Step 2
+        as yk ea sr
+    Result
+        **asykeasr**
+C. 
+    

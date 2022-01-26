@@ -11,7 +11,7 @@ english word.
 
 
 import string
-import enchant
+#import enchant
 AlphaLower = string.ascii_lowercase
 AlphaUpper = string.ascii_uppercase
 
@@ -39,15 +39,15 @@ def main():
     inputC = readFile("textFiles/class_input_c.txt")
     MyInputEnc = readFile("textFiles/my_input_for_Encryption.txt")
     MyInputDec = readFile("textFiles/my_input_for_Decryption.txt")
-    EnKey = int(input("Enter an Encryption Key\n"))%26
+    EnKey = AlphaLower.index(inputB[0][0].lower())+1
     outB = Encrypt(inputB, EnKey)
-    outC = Decrypt(inputC)
+    #outC = Decrypt(inputC)
     MyOutEnc = Encrypt(MyInputEnc, EnKey)
-    MyOutDec = Decrypt(MyInputDec)
+    #MyOutDec = Decrypt(MyInputDec)
     writeFile("textFiles/class_output_b.txt", outB)
-    writeFile("textFiles/class_output_c.txt", outC)
+    #writeFile("textFiles/class_output_c.txt", outC)
     writeFile("textFiles/my_output_for_Encryption.txt", MyOutEnc)
-    writeFile("textFiles/my_output_for_Decryption.txt", MyOutDec)
+    #writeFile("textFiles/my_output_for_Decryption.txt", MyOutDec)
 
 def Encrypt(Text, Key):
     NewText = []
