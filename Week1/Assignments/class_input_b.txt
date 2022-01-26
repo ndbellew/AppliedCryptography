@@ -1,1 +1,2 @@
-Write a program that can encrypt and decrypt using the general Caesar cipher described in the Textbook Section 3.2 (not the Affine Caesar Cipher). Ignore the non-letter symbols
+cryptofun
+This class explores basic security issues in computer communication, classical cryptographic algorithms, symmetric-key cryptography, public-key cryptography, authentication, and digital signatures. Prer., CS 2150 or MATH 2150 and CS 3020 or CS 3060 or CS 3080.
