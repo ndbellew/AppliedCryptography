@@ -21,4 +21,3 @@ https://securelist.com/moonbounce-the-dark-side-of-uefi-firmware/105468/ - sited
 Par 1 The incident - MoonBounce what is it?
 
 Par 2 Security Triad - What effect does this have on us?
-
