@@ -4,7 +4,11 @@ Problem 6 Hill Cipher
 import math
 import string
 import numpy as np
+import enchant
+import scipy as sp
+from pprint import pprint
 
+EnglishDictionary = enchant.Dict("en_US")
 AlphaLower = string.ascii_lowercase
 
 '''
@@ -14,7 +18,7 @@ def readFile(File):
     with open(File) as f:
         read_data = f.read()
     f.close()
-    return read_data.split("\r\n")# Returns a list separated by the endline parameter for strings
+    return read_data.split("\n")# Returns a list separated by the endline parameter for strings
 
 
 '''
@@ -27,24 +31,100 @@ def writeFile(File, Text):
     f.close()
 
 def main():
-    InputToEncrypt = readFile("textFiles/class_input_b.txt")
-    InputToDecrypt = readFile("textFiles/class_input_c.txt")
-    EncKey = GetKey(InputToEncrypt[0].lower())
+    Key, InputToEncrypt = readFile("textFiles/HillEncryptionInputTest.txt")
+    EncKey, DecKey = GetKey(Key.lower())
     print(EncKey)
+    print(DecKey)
+    writeFile("textFiles/HillEncryptionOut.txt", [Key, Encrypt(EncKey, CleanPunctuation(InputToEncrypt).lower())])
+    Key, InputToDecrypt, _ = readFile("textFiles/HillEncryptionOut.txt")
+    writeFile("textFiles/HillDecryptionOut.txt", [Key, Decrypt(DecKey, CleanPunctuation(InputToDecrypt).lower())])
 
-def Encrypt():
-    pass
+def Encrypt(EncKey, text):
+    RowNum = EncKey.shape[0] #np.array.shape should return m,n where m is number of rows and n is number of colums 
+    # Need to turn text into 1xM where m is the total number of rows in the key.
+    ListOfMessageVectors = CreateMatrixList(text, RowNum)    
+    EncryptedText = ""
+    for Vector in ListOfMessageVectors:
+        EncVector = np.dot(EncKey , Vector) % 26
+        for letter in EncVector:
+            EncryptedText += AlphaLower[letter]
+    return EncryptedText
 
-def Decrypt():
-    pass
+def Decrypt(DecKey, text):
+    RowNum = DecKey.shape[0]
+    ListOfMessageVectors = CreateMatrixList(text, RowNum)
+    DecryptedText = ""
+    for Vector in ListOfMessageVectors:
+        DecVector =  np.dot(DecKey, Vector) % 26
+        for letter in DecVector:
+            DecryptedText += AlphaLower[letter]
+    # return enchantText(DecryptedText)
+    return DecryptedText
 
 def GetKey(text):
     TempList = []
+    MatrixKey = []
+    EncKey, DecKey = None, None
     MatrixLength = int(math.sqrt(len(text)))
-    for i in text:
-        TempList.append(AlphaLower.index(i))
-    MatrixKey = np.array(TempList)
-    return MatrixKey
+    for letter in range(len(text)):
+        TempList.append(AlphaLower.index(text[letter]))
+        if (letter+1) % MatrixLength  == 0:            
+            MatrixKey.append(TempList)
+            TempList = []
+    EncKey = np.array(MatrixKey)
+    if MatrixLength == 3:
+        Determinant = (int(np.linalg.det(EncKey)) % 26)
+        for x in range(100):
+            #print(f"{x} * {Determinant} = {x*Determinant}\nand {x*Determinant} % 26 = {(x*Determinant) % 26}")
+            if (x * Determinant) % 26 == 1:
+                MultiplicativeInverse = x
+                break
+        Ctrans = (np.matrix.getH(EncKey) % 26).T
+        print(np.matrix.getH(EncKey))
+        DecKey = (np.dot(MultiplicativeInverse, Ctrans)%26).astype(int)
+        print(MultiplicativeInverse)
+    else:
+        a, b, c, d = np.matrix.getA1(EncKey)
+    # DecKey = ( np.dot(np.linalg.inv(EncKey).T , (np.linalg.det(EncKey)%26)**-1) % 26).astype(int)
+    return EncKey, DecKey
+
+def CreateMatrixList(text, size):
+    TempList = []
+    ListOfMessageVectors = []
+    for letter in range(len(text)):
+        if text[letter].lower() not in AlphaLower:
+            continue
+        #print(letter, text[letter])
+        TempList.append(AlphaLower.index(text[letter]))
+        if (letter+1) % size == 0:
+            ListOfMessageVectors.append(np.array(TempList))
+            TempList = []
+    return ListOfMessageVectors
+
+# def enchantText(Text):
+#     newText = ""
+#     tempText = ""
+#     for letter in Text:
+#         tempText += letter
+#         if EnglishDictionary.check(tempText):
+#             if newText != "":
+#                 newText += " "
+#             newText += tempText
+#             tempText = ""
+#     newText+=tempText
+#     return newText
+
+"""
+The Logic for incorporating spaces and punctuation is not normally used in the Hill Cipher. I know this from the class input
+file, so to generalize this, a user can put any phrase or sentence in regardless of punctuation and still get a result. 
+This function Clean Punctuation just removes Punctuation and spaces from the text.
+"""
+def CleanPunctuation(Text):
+    NewText = ""
+    for Letter in Text:
+        if Letter.lower() in AlphaLower:
+            NewText+=Letter
+    return NewText
 
 if __name__ == "__main__":
     main()

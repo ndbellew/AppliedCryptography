@@ -11,7 +11,7 @@ english word.
 
 
 import string
-#import enchant
+import enchant
 AlphaLower = string.ascii_lowercase
 AlphaUpper = string.ascii_uppercase
 
@@ -37,17 +37,17 @@ def writeFile(File, Text):
 def main():
     inputB = readFile("textFiles/class_input_b.txt")
     inputC = readFile("textFiles/class_input_c.txt")
-    MyInputEnc = readFile("textFiles/my_input_for_Encryption.txt")
-    MyInputDec = readFile("textFiles/my_input_for_Decryption.txt")
+    MyInputEnc = readFile("textFiles/CaesarEncryption.txt")
+    MyInputDec = readFile("textFiles/CaesarDecryp.txt")
     EnKey = AlphaLower.index(inputB[0][0].lower())+1
     outB = Encrypt(inputB, EnKey)
-    #outC = Decrypt(inputC)
+    outC = Decrypt(inputC)
     MyOutEnc = Encrypt(MyInputEnc, EnKey)
-    #MyOutDec = Decrypt(MyInputDec)
+    MyOutDec = Decrypt(MyInputDec)
     writeFile("textFiles/class_output_b.txt", outB)
-    #writeFile("textFiles/class_output_c.txt", outC)
-    writeFile("textFiles/my_output_for_Encryption.txt", MyOutEnc)
-    #writeFile("textFiles/my_output_for_Decryption.txt", MyOutDec)
+    writeFile("textFiles/class_output_c.txt", outC)
+    writeFile("textFiles/CaesarOutEncryption.txt", MyOutEnc)
+    writeFile("textFiles/CaesarOutDecryption.txt", MyOutDec)
 
 def Encrypt(Text, Key):
     NewText = []
@@ -84,7 +84,6 @@ def Decrypt(Text):
             NewText.append(NewSentence)
         Test = NewText[0].split()[0] # This will take a sentence and split it down into a single word
                                     # (in this instance its just a  word but will still work)
-        print(Test)
         EnglishDictionary = enchant.Dict("en_US")
         if EnglishDictionary.check(Test):
             return NewText
