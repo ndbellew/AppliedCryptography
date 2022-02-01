@@ -4,9 +4,6 @@ Problem 6 Hill Cipher
 import math
 import string
 import numpy as np
-import enchant
-import scipy as sp
-from pprint import pprint
 
 EnglishDictionary = enchant.Dict("en_US")
 AlphaLower = string.ascii_lowercase
@@ -72,20 +69,17 @@ def GetKey(text):
             MatrixKey.append(TempList)
             TempList = []
     EncKey = np.array(MatrixKey)
-    if MatrixLength == 3:
+    if MatrixLength >= 3:
         Determinant = (int(np.linalg.det(EncKey)) % 26)
-        for x in range(100):
-            #print(f"{x} * {Determinant} = {x*Determinant}\nand {x*Determinant} % 26 = {(x*Determinant) % 26}")
-            if (x * Determinant) % 26 == 1:
-                MultiplicativeInverse = x
-                break
+        MultiplicativeInverse = getMultiplicativeInverse(Determinant)
         Ctrans = (np.matrix.getH(EncKey) % 26).T
-        print(np.matrix.getH(EncKey))
         DecKey = (np.dot(MultiplicativeInverse, Ctrans)%26).astype(int)
-        print(MultiplicativeInverse)
     else:
         a, b, c, d = np.matrix.getA1(EncKey)
-    # DecKey = ( np.dot(np.linalg.inv(EncKey).T , (np.linalg.det(EncKey)%26)**-1) % 26).astype(int)
+        Determinant = ((a*d) - (b*c) % 26)
+        MultiplicativeInverse = getMultiplicativeInverse(Determinant)
+        AdjugateMatrix = np.matrix([[d, -b+26], [-c+26, a]])
+        DecKey = MultiplicativeInverse * AdjugateMatrix
     return EncKey, DecKey
 
 def CreateMatrixList(text, size):
@@ -101,18 +95,10 @@ def CreateMatrixList(text, size):
             TempList = []
     return ListOfMessageVectors
 
-# def enchantText(Text):
-#     newText = ""
-#     tempText = ""
-#     for letter in Text:
-#         tempText += letter
-#         if EnglishDictionary.check(tempText):
-#             if newText != "":
-#                 newText += " "
-#             newText += tempText
-#             tempText = ""
-#     newText+=tempText
-#     return newText
+def getMultiplicativeInverse(Determinant):
+    for x in range(100):
+            if (x * Determinant) % 26 == 1:
+                return x
 
 """
 The Logic for incorporating spaces and punctuation is not normally used in the Hill Cipher. I know this from the class input
