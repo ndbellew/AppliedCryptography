@@ -27,7 +27,9 @@ MoonBounce is a threat to primarily system integrity and authenticity. MoonBounc
 [MoonBounce: The Dark Side of UEFI Firmware](https://securelist.com/moonbounce-the-dark-side-of-uefi-firmware/105468/)
 
 ## Problem 3. Affine Caesar Cipher
+
 $$C = E([a,b]p) = (ap + b) mod {26}$$
+
 ### A.
 
 The value of *b* does not have any limitations and can be completely arbitrary. Because the decryption function is the inverse of the encryption function and *a* is a coprime of mod *m* (in this case 26) then *b* should be removed automatically in the decryption process regardless of the number. This means that if *b* is some huge number the decryption process would not be effected no matter how large or small *b* is. 
