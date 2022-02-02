@@ -7,6 +7,12 @@ import numpy as np
 
 AlphaLower = string.ascii_lowercase
 
+def main():
+    RunCipher("textFiles/class_input_b.txt", "textFiles/class_output_b_Hill.txt", True)
+    RunCipher("textFiles/class_input_c.txt", "textFiles/class_output_c_Hill.txt", False)
+    RunCipher("textFiles/HillEncryptionInput.txt", "textFiles/HillEncryptionOutput.txt", True)
+    RunCipher("textFiles/HillDecryptionInput.txt", "textFiles/HillDecryptionOutput.txt", False)
+
 '''
 readFile is a function that is used to read in a file and generate a list where each member of the list is a line in the file.
 '''
@@ -14,7 +20,11 @@ def readFile(File):
     with open(File) as f:
         read_data = f.read()
     f.close()
-    return read_data.split("\n")# Returns a list separated by the endline parameter for strings
+    # Occaisionally read in files would read an additional newline even if there were none, this is to ensure
+    # that I am only reading in the first 2 lines.
+    data_list = read_data.split("\n")
+    data_tuple = (data_list[0], data_list[1])
+    return data_tuple# Returns a list separated by the endline parameter for strings
 
 
 '''
@@ -26,12 +36,15 @@ def writeFile(File, Text):
             f.write(sentence+"\n")
     f.close()
 
-def main():
-    Key, InputToEncrypt = readFile("textFiles/HillEncryptionInputTest.txt")
+def RunCipher(InputFile, OutputFile, needEncrypt):
+
+    Key, InputMessage= readFile(InputFile)
     EncKey, DecKey = GetKey(Key.lower())
-    # writeFile("textFiles/HillEncryptionOut.txt", [Key, Encrypt(EncKey, CleanPunctuation(InputToEncrypt).lower())])
-    Key, InputToDecrypt = readFile("textFiles/HillEncryptionInputTest.txt")
-    writeFile("textFiles/HillDecryptionOut.txt", [Key, Decrypt(DecKey, CleanPunctuation(InputToDecrypt).lower())])
+    if needEncrypt:
+        writeFile(OutputFile, [Key, Encrypt(EncKey, CleanPunctuation(InputMessage).lower())])
+    else:
+        writeFile(OutputFile, [Key, Decrypt(DecKey, CleanPunctuation(InputMessage).lower())])
+    
 
 def Encrypt(EncKey, text):
     RowNum = EncKey.shape[0] #np.array.shape should return m,n where m is number of rows and n is number of colums 
@@ -39,7 +52,10 @@ def Encrypt(EncKey, text):
     ListOfMessageVectors = CreateMatrixList(text, RowNum)    
     EncryptedText = ""
     for Vector in ListOfMessageVectors:
-        EncVector = np.dot(EncKey , Vector) % 26
+        if RowNum < 3:
+            EncVector = np.matrix((np.dot(EncKey, Vector) % 26)).tolist()[0] # Rationale in Decrypt
+        else:
+            EncVector = np.dot(EncKey , Vector) % 26
         for letter in EncVector:
             EncryptedText += AlphaLower[letter]
     return EncryptedText
@@ -102,7 +118,7 @@ def CreateMatrixList(text, size):
     return ListOfMessageVectors
 
 def getMultiplicativeInverse(Determinant):
-    for x in range(25):
+    for x in range(26):
             if (x * Determinant) % 26 == 1:
                 return x
 
