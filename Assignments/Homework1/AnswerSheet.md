@@ -34,20 +34,20 @@ The value of *b* does not have any limitations and can be completely arbitrary. 
 Proof:
 E = Encryption 
 D = Decryption
-$
-E(x) = (ax+b) \mod m \\
-D(x) = a^{-1}(x-b) \mod m \\
-1 = aa^{-1} \mod m \\$
+
+$E(x) = (ax+b) \mod m \\$
+$D(x) = a^{-1}(x-b) \mod m \\$
+$1 = aa^{-1} \mod m \\$
 
 So Therefore
 
-$
-D(E(x)) = a^{-1} (E(x) - b) \mod m \\
-D(E(x)) = a^{-1}(((ax+b) \mod m) - b )\mod m \\
-D(E(x)) = a^{-1}(ax+b-b) \mod m \\
-D(E(x)) = a^{-1}ax \mod m \\
-D(E(x)) = x \mod m
-$
+
+$D(E(x)) = a^{-1} (E(x) - b) \mod m \\$
+$D(E(x)) = a^{-1}(((ax+b) \mod m) - b )\mod m \\$
+$D(E(x)) = a^{-1}(ax+b-b) \mod m \\$
+$D(E(x)) = a^{-1}ax \mod m \\$
+$D(E(x)) = x \mod m$
+
 
 Here you can see the *b* is canceled out prior to the evaluation of the a and inverse a, meaning even if the a does not follow the restrictions b will still be canceled out, therefore *b* has no limitations.
 ### B.
