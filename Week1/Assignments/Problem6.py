@@ -5,7 +5,6 @@ import math
 import string
 import numpy as np
 
-EnglishDictionary = enchant.Dict("en_US")
 AlphaLower = string.ascii_lowercase
 
 '''
@@ -30,10 +29,8 @@ def writeFile(File, Text):
 def main():
     Key, InputToEncrypt = readFile("textFiles/HillEncryptionInputTest.txt")
     EncKey, DecKey = GetKey(Key.lower())
-    print(EncKey)
-    print(DecKey)
-    writeFile("textFiles/HillEncryptionOut.txt", [Key, Encrypt(EncKey, CleanPunctuation(InputToEncrypt).lower())])
-    Key, InputToDecrypt, _ = readFile("textFiles/HillEncryptionOut.txt")
+    # writeFile("textFiles/HillEncryptionOut.txt", [Key, Encrypt(EncKey, CleanPunctuation(InputToEncrypt).lower())])
+    Key, InputToDecrypt = readFile("textFiles/HillEncryptionInputTest.txt")
     writeFile("textFiles/HillDecryptionOut.txt", [Key, Decrypt(DecKey, CleanPunctuation(InputToDecrypt).lower())])
 
 def Encrypt(EncKey, text):
@@ -48,14 +45,24 @@ def Encrypt(EncKey, text):
     return EncryptedText
 
 def Decrypt(DecKey, text):
+    print(DecKey)
     RowNum = DecKey.shape[0]
     ListOfMessageVectors = CreateMatrixList(text, RowNum)
     DecryptedText = ""
     for Vector in ListOfMessageVectors:
-        DecVector =  np.dot(DecKey, Vector) % 26
+        if RowNum <3:
+            # For some reason when i did the dot matrix formula on the 2x2 matrix it created an immutable
+            # matrix that I couldn't modify or iterate through so i had to force it into a python list
+            # in order to modify it because in addition to being immutable it became a 2 dimensional vector
+            # Which is not possible for vectors. 
+            DecVector = np.matrix((np.dot(DecKey, Vector)% 26)).tolist()[0]
+            # if the added stuff was nto done the value would be matrix([[x, y]]) instaed of matrix([x,y]) and
+            # the matrix would become immutable and non-iterable.
+        else:
+            DecVector =  (np.dot(DecKey, Vector) % 26)
+        
         for letter in DecVector:
             DecryptedText += AlphaLower[letter]
-    # return enchantText(DecryptedText)
     return DecryptedText
 
 def GetKey(text):
@@ -70,7 +77,7 @@ def GetKey(text):
             TempList = []
     EncKey = np.array(MatrixKey)
     if MatrixLength >= 3:
-        Determinant = (int(np.linalg.det(EncKey)) % 26)
+        Determinant = (round(np.linalg.det(EncKey)) % 26)
         MultiplicativeInverse = getMultiplicativeInverse(Determinant)
         Ctrans = (np.matrix.getH(EncKey) % 26).T
         DecKey = (np.dot(MultiplicativeInverse, Ctrans)%26).astype(int)
@@ -79,7 +86,7 @@ def GetKey(text):
         Determinant = ((a*d) - (b*c) % 26)
         MultiplicativeInverse = getMultiplicativeInverse(Determinant)
         AdjugateMatrix = np.matrix([[d, -b+26], [-c+26, a]])
-        DecKey = MultiplicativeInverse * AdjugateMatrix
+        DecKey = (MultiplicativeInverse * AdjugateMatrix) % 26
     return EncKey, DecKey
 
 def CreateMatrixList(text, size):
@@ -88,7 +95,6 @@ def CreateMatrixList(text, size):
     for letter in range(len(text)):
         if text[letter].lower() not in AlphaLower:
             continue
-        #print(letter, text[letter])
         TempList.append(AlphaLower.index(text[letter]))
         if (letter+1) % size == 0:
             ListOfMessageVectors.append(np.array(TempList))
@@ -96,7 +102,7 @@ def CreateMatrixList(text, size):
     return ListOfMessageVectors
 
 def getMultiplicativeInverse(Determinant):
-    for x in range(100):
+    for x in range(25):
             if (x * Determinant) % 26 == 1:
                 return x
 
