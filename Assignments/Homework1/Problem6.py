@@ -29,7 +29,7 @@ def main():
     RunCipher("textFiles/class_input_b.txt", "textFiles/Problem6/Bellew_Output_6b.txt", True)
     RunCipher("textFiles/class_input_c.txt", "textFiles/Problem6/Bellew_Output_6c.txt", False)
     # SO what i did here was I created an Encryption out put and a Decryption Output so that when you grade you can tell the difference. 
-    # The Decryption will take what the Encryption made and decyrpt it which should be the same as the initial input
+    # The Decryption will take what the Encryption made and decrypt it which should be the same as the initial input
     RunCipher("textFiles/Problem6/Bellew_Input_6d.txt", "textFiles/Problem6/Encryption_Bellew_Output_6d.txt", True)
     RunCipher("textFiles/Problem6/Encryption_Bellew_Output_6d.txt", "textFiles/Problem6/Decryption_Bellew_Output_6d.txt", False)
     # Decryption_Bellew_Output_6d.txt should equal Bellew_Input_6d.txt
