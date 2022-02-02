@@ -26,10 +26,13 @@ AlphaLower = string.ascii_lowercase
 The main function is what is called when the program is run. From here the function RunCipher is called which will run the actual cipher. I use main mostly for testing grounds but when testing is completed i removed everything and replaced it with only what is necessary.
 """
 def main():
-    RunCipher("textFiles/class_input_b.txt", "textFiles/class_output_b_Problem6.txt", True)
-    RunCipher("textFiles/class_input_c.txt", "textFiles/class_output_c_Problem6.txt", False)
-    RunCipher("textFiles//Encryption_Bellew_Input_Problem6.txt", "textFiles/Encryption_Bellew_Output_Problem6.txt", True)
-    RunCipher("textFiles/Decryption_Bellew_Input_Problem6.txt", "textFiles/Decryption_Bellew_Output_Problem6.txt", False)
+    RunCipher("textFiles/class_input_b.txt", "textFiles/Problem6/Bellew_Output_6b.txt", True)
+    RunCipher("textFiles/class_input_c.txt", "textFiles/Problem6/Bellew_Output_6c.txt", False)
+    # SO what i did here was I created an Encryption out put and a Decryption Output so that when you grade you can tell the difference. 
+    # The Decryption will take what the Encryption made and decyrpt it which should be the same as the initial input
+    RunCipher("textFiles/Problem6/Bellew_Input_6d.txt", "textFiles/Problem6/Encryption_Bellew_Output_6d.txt", True)
+    RunCipher("textFiles/Problem6/Encryption_Bellew_Output_6d.txt", "textFiles/Problem6/Decryption_Bellew_Output_6d.txt", False)
+    # Decryption_Bellew_Output_6d.txt should equal Bellew_Input_6d.txt
 
 '''
 readFile is a function that is used to read in a file and generate a list where each member of the list is a line in the file.

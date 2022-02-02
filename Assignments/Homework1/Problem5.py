@@ -21,8 +21,13 @@ AlphaUpper = string.ascii_uppercase
 """
 def main():
     # RunCipher( Input File Name, Output File Name, This Needs to be Encrypted True or False?)
-    RunCipher("textFiles/class_input_b.txt", "textFiles/Bellew_Output_5b.txt", True)
-    RunCipher("textFiles/Bellew_Output_5b.txt", "textFiles/TestOutput.txt", False)
+    RunCipher("textFiles/class_input_b.txt", "textFiles/Problem5/Bellew_Output_5b.txt", True)
+    RunCipher("textFiles/class_input_c.txt", "textFiles/Problem5/Bellew_Output_5c.txt", False)
+    # SO what i did here was I created an Encryption out put and a Decryption Output so that when you grade you can tell the difference. 
+    # The Decryption will take what the Encryption made and decyrpt it which should be the same as the initial input
+    RunCipher("textFiles/Problem5/Bellew_Input_5d.txt", "textFiles/Problem5/Encryption_Bellew_Output_5d.txt", True)
+    RunCipher("textFiles/Problem5/Encryption_Bellew_Output_5d.txt", "textFiles/Problem5/Decryption_Bellew_Output_5d.txt", False)
+    # Decryption_Bellew_Output_5d.txt should equal Bellew_Input_5d.txt
 
 '''
 readFile is a function that is used to read in a file and generate a list where each member of the list is a line in the file.
