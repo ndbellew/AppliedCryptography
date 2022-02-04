@@ -109,4 +109,4 @@ In order to calculate the total number of possible keys that can be produced by 
 
 ### E.
 
-The standard Playfair Cipher is a 5x5 square, to calculate all possibilities including possible repeats it would be factorial 25 or 25! but because we only want to know distinct keys the formula changes to: $$\frac {25!} {5^2} \approx 2^{79}$$
+The standard Playfair  Cipher is a 5x5 square, to calculate all possibilities including possible repeats it would be factorial 25 or 25! but because we only want to know distinct keys the formula changes to: $$\frac {25!} {5^2} \approx 2^{79}$$
