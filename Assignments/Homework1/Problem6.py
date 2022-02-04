@@ -114,8 +114,10 @@ After Appending the letter position I check to see how many letters have been ad
 I then add the TempList to the MatrixKey and clear TempList.
 When the loop is done I convert the MatrixKey list into a numpy matrix and that is the EncryptionKey. 
 From there I calculate the Decryption Key, calculating this when m is 3 or more is simple and involves a transposition. Doing it when m is 2 is harder and requires a little bit more precision. So i differentiate the two and handle a 2x2 matrix key different from a 3x3 or 4x4.
-The Decryption Key is found by calculating the Determinant, then calculating the MultiplicativeInverse of that Determinant (I brute force the Multiplicative Inverse since the max length is 26).
-From there I find the Adjugate Matrix for a 2x2 or the Ctrans which is C^T in linear algebra terms. Last I use the Adjugate Matrix times the Multiplicative Inverse mod 25 to calculate the Decryption Key. Or I use the Ctrans inplace of the AdjugateMatrix.
+The Decryption Key is found by calculating the Determinant, then calculating the MultiplicativeInverse of that Determinant) and multiplying the two together. 
+But I found a library that does all this for me. The reason I would have to calculate this is so that the
+inverse is using a mod 26 in its calculations. Sympy is the library that actually is able to do that without
+needing to recreate the formula in Numpy. So using sympy i create the Decryption key by inverting the Encryption Key and doing mod 26 on each number in the matrix.
 """
 def GetKey(Key):
     TempList = [] # Will hold the current working row for the matrix. I will build the matrix row by row.
@@ -158,16 +160,6 @@ def CreateMatrixList(text, size):
             TempList = []
         # ListOfMessageVectors should be a List of Matrices that are all 1xm where m==size
     return ListOfMessageVectors
-
-"""
-getMultiplicativeInverse brute forces the MultiplicativeInverse.
-The MI is calculated by checking if (MI * Determinant) % 26 == 1. If so then whatever that MI is is the Multiplicative Inverse.
-"""
-def getMultiplicativeInverse(Determinant):
-    for x in range(27):
-        # English alphabet only has 26 letters so it has to be one of the 26
-        if (x * Determinant) % 26 == 1:
-            return x
 
 """
 The Logic for incorporating spaces and punctuation is not normally used in the Hill Cipher. I know this from the class input
