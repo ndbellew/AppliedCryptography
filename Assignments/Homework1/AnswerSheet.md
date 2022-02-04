@@ -52,6 +52,7 @@ $D(E(x)) = x \mod m$
 
 
 Here you can see the *b* is canceled out prior to the evaluation of the a and inverse a, meaning even if the a does not follow the restrictions b will still be canceled out, therefore *b* has no limitations.
+
 ### B.
 
 In order to produce distinct mapping for the Affine Caesar cipher, *b* is limited such that $ap+b \neq m$. So assuming a is a coprime of m the number created by $ap$ will not equal m, to ensure distinct mapping $ap+b$ must also not equal m.
@@ -101,6 +102,7 @@ Result
 ### C.
 
 The solution clearly illustrates the main issue with the Playfair cipher, it can obfuscate some phrases but there will always exist edge cases where some letters within the initial message could repeat. This means that if the message contains letters that are all within the same row or column, the message will not be obfuscated to the same level as a longer message with a more diverse set of letters.
+
 ### D.
 
 In order to calculate the total number of possible keys that can be produced by the Playfair Cipher, a factorial is needed. Because the Playfair Cipher is 5 x 5 then it can be determined that the total number of keys is: $$25! \approx 2^{84}$$
