@@ -15,10 +15,13 @@ string
  - The string library is called in order to easily create a list of the english alphabet in lowercase. As seen below called AlphaLower.
 numpy as np\
  - The numpy library is used primarily to solve some of the more difficult linear algebra math problems that are related to solving the matrices for a Hill Cipher. 
+ sympy as sp
+ - Sympy comes with a very good matrix object which has a matrixInvert with mod function which makes inverting the matrix far easier.
 '''
 import math
 import string
 import numpy as np
+import sympy as sp
 
 AlphaLower = string.ascii_lowercase
 
@@ -67,13 +70,12 @@ def RunCipher(InputFile, OutputFile, needEncrypt):
     EncKey, DecKey = GetKey(Key.lower())
     if needEncrypt:
     # Outputs Encryption information into a file. I include the Key in the first line so that it mimics the initial file format.
-        writeFile(OutputFile, [Key, Encrypt(EncKey, CleanPunctuation(InputMessage).lower())])
+        writeFile(OutputFile, [Key, HillCipher(EncKey, CleanPunctuation(InputMessage).lower())])
     else:
-        writeFile(OutputFile, [Key, Decrypt(DecKey, CleanPunctuation(InputMessage).lower())])
+        writeFile(OutputFile, [Key, HillCipher(DecKey, CleanPunctuation(InputMessage).lower())])
     
 """
-The Encryption and Decryption functions are virtually the same function. The only reason they are separated is to simplify testing. 
-Thinking about creating a single function for both called HillCipher(Key, text) it should work. 
+The Encryption and Decryption functions are virtually the same function. so I made them one.
 First the number of rows is determined (this is the m in the m x m).
 This is used to send to CreateMatrixList which changes the text into a series of 1 x m vectors where m is the RowNum. When the List of Vectors is created I loop through the vectors and do a Matrix dot Matrix formula. 
 Where the Key is multiplied against the Vector, mod 26 is then taken, and that vector has then been changed into a new vector which is the encryption/decryption.
@@ -81,44 +83,9 @@ Noted below there were some problems with multiplying matrices that were 2x2. So
 After the vectors have been encrypted/decrypted the Vectors are are iterated through and the numbers modified to letters. The letters are then 
 added to the CipherText which will be what is outputted to the chosen OutPutFile.
 """
-def Encrypt(EncKey, text):
-    RowNum = EncKey.shape[0] #np.array.shape should return m,n where m is number of rows and n is number of colums 
+def HillCipher(Key, text):
+    RowNum = Key.shape[0] # np.array.shape should return m,n where m is number of rows and n is number of columns 
     # Need to turn text into 1xM where m is the total number of rows in the key.
-    ListOfMessageVectors = CreateMatrixList(text, RowNum)    
-    EncryptedText = ""
-    for Vector in ListOfMessageVectors:
-        if RowNum < 3:
-            EncVector = np.matrix((np.dot(EncKey, Vector) % 26)).tolist()[0] # Rationale in Decrypt
-        else:
-            EncVector = np.dot(EncKey , Vector) % 26
-        for letter in EncVector:
-            EncryptedText += AlphaLower[letter]
-    return EncryptedText
-
-# def HillCipher(Key, text):
-#     RowNum = Key.shape[0] # np.array.shape should return m,n where m is number of rows and n is number of columns 
-#     # Need to turn text into 1xM where m is the total number of rows in the key.
-#     ListOfMessageVectors = CreateMatrixList(text, RowNum)
-#     DecryptedText = ""
-#     for Vector in ListOfMessageVectors:
-#         if RowNum <3:
-#             # For some reason when i did the dot matrix formula on the 2x2 matrix it created an immutable
-#             # matrix that I couldn't modify or iterate through so i had to force it into a python list
-#             # in order to modify it because in addition to being immutable it became a 2 dimensional vector
-#             # Which is not possible for vectors. 
-#             DecVector = np.matrix((np.dot(Key, Vector)% 26)).tolist()[0]
-#             # if the added stuff was nto done the value would be matrix([[x, y]]) instead of matrix([x,y]) and
-#             # the matrix would become immutable and non-iterable.
-#         else:
-#             DecVector =  (np.dot(Key, Vector) % 26)
-        
-#         for letter in DecVector:
-#             DecryptedText += AlphaLower[letter]
-#     return DecryptedText
-
-def Decrypt(DecKey, text):
-    print(DecKey)
-    RowNum = DecKey.shape[0]
     ListOfMessageVectors = CreateMatrixList(text, RowNum)
     DecryptedText = ""
     for Vector in ListOfMessageVectors:
@@ -127,11 +94,11 @@ def Decrypt(DecKey, text):
             # matrix that I couldn't modify or iterate through so i had to force it into a python list
             # in order to modify it because in addition to being immutable it became a 2 dimensional vector
             # Which is not possible for vectors. 
-            DecVector = np.matrix((np.dot(DecKey, Vector)% 26)).tolist()[0]
-            # if the added stuff was nto done the value would be matrix([[x, y]]) instaed of matrix([x,y]) and
+            DecVector = np.matrix((np.dot(Key, Vector)% 26)).tolist()[0]
+            # if the added stuff was nto done the value would be matrix([[x, y]]) instead of matrix([x,y]) and
             # the matrix would become immutable and non-iterable.
         else:
-            DecVector =  (np.dot(DecKey, Vector) % 26)
+            DecVector =  (np.dot(Key, Vector) % 26)
         
         for letter in DecVector:
             DecryptedText += AlphaLower[letter]
@@ -147,8 +114,10 @@ After Appending the letter position I check to see how many letters have been ad
 I then add the TempList to the MatrixKey and clear TempList.
 When the loop is done I convert the MatrixKey list into a numpy matrix and that is the EncryptionKey. 
 From there I calculate the Decryption Key, calculating this when m is 3 or more is simple and involves a transposition. Doing it when m is 2 is harder and requires a little bit more precision. So i differentiate the two and handle a 2x2 matrix key different from a 3x3 or 4x4.
-The Decryption Key is found by calculating the Determinant, then calculating the MultiplicativeInverse of that Determinant (I brute force the Multiplicative Inverse since the max length is 26).
-From there I find the Adjugate Matrix for a 2x2 or the Ctrans which is C^T in linear algebra terms. Last I use the Adjugate Matrix times the Multiplicative Inverse mod 25 to calculate the Decryption Key. Or I use the Ctrans inplace of the AdjugateMatrix.
+The Decryption Key is found by calculating the Determinant, then calculating the MultiplicativeInverse of that Determinant) and multiplying the two together. 
+But I found a library that does all this for me. The reason I would have to calculate this is so that the
+inverse is using a mod 26 in its calculations. Sympy is the library that actually is able to do that without
+needing to recreate the formula in Numpy. So using sympy i create the Decryption key by inverting the Encryption Key and doing mod 26 on each number in the matrix.
 """
 def GetKey(Key):
     TempList = [] # Will hold the current working row for the matrix. I will build the matrix row by row.
@@ -164,21 +133,10 @@ def GetKey(Key):
             TempList = []
     EncKey = np.array(MatrixKey)
     # Encryption Key is just a matrixed version of the starting key text.
-    if MatrixLength >= 3:
-        Determinant = (round(np.linalg.det(EncKey)) % 26)
-        MultiplicativeInverse = getMultiplicativeInverse(Determinant)
-        Ctrans = (np.matrix.getH(EncKey) % 26).T
-        DecKey = (np.dot(MultiplicativeInverse, Ctrans)%26).astype(int)
-    else:
-        # Had some issues with using the above formula to calculate 2x2. So I just decided to hard code this portion.
-        # all test were successful on the above formula so long as m is greater than 2. 
-        a, b, c, d = np.matrix.getA1(EncKey)
-        Determinant = ((a*d) - (b*c) % 26)# Calculate determinant.
-        MultiplicativeInverse = getMultiplicativeInverse(Determinant)
-        AdjugateMatrix = np.matrix([[d, -b+26], [-c+26, a]])# Manually modify the 2x2 matrix to create an adjuage Matrix. 
-        # Numbers cannot be negative so I add 26 to the negative numbers.
-        DecKey = (MultiplicativeInverse * AdjugateMatrix) % 26
-        # DecKey is the MultiplicativeInverse * AdjugateMatrix mod 26.
+    # using sympy i can calculate the inverse mod.
+    Temp = sp.Matrix(EncKey)
+    TempInv = Temp.inv_mod(26) # mod 26 for english alphabet
+    DecKey = np.array(TempInv) # turn back into numpy matrix
     return EncKey, DecKey
 
 """
@@ -202,16 +160,6 @@ def CreateMatrixList(text, size):
             TempList = []
         # ListOfMessageVectors should be a List of Matrices that are all 1xm where m==size
     return ListOfMessageVectors
-
-"""
-getMultiplicativeInverse brute forces the MultiplicativeInverse.
-The MI is calculated by checking if (MI * Determinant) % 26 == 1. If so then whatever that MI is is the Multiplicative Inverse.
-"""
-def getMultiplicativeInverse(Determinant):
-    for x in range(26):
-        # English alphabet only has 26 letters so it has to be one of the 26
-            if (x * Determinant) % 26 == 1:
-                return x
 
 """
 The Logic for incorporating spaces and punctuation is not normally used in the Hill Cipher. I know this from the class input

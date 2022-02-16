@@ -27,29 +27,32 @@ MoonBounce is a threat to primarily system integrity and authenticity. MoonBounc
 [MoonBounce: The Dark Side of UEFI Firmware](https://securelist.com/moonbounce-the-dark-side-of-uefi-firmware/105468/)
 
 ## Problem 3. Affine Caesar Cipher
+
 $$C = E([a,b]p) = (ap + b) mod {26}$$
+
 ### A.
 
 The value of *b* does not have any limitations and can be completely arbitrary. Because the decryption function is the inverse of the encryption function and *a* is a coprime of mod *m* (in this case 26) then *b* should be removed automatically in the decryption process regardless of the number. This means that if *b* is some huge number the decryption process would not be effected no matter how large or small *b* is. 
 Proof:
 E = Encryption 
 D = Decryption
-$
-E(x) = (ax+b) \mod m \\
-D(x) = a^{-1}(x-b) \mod m \\
-1 = aa^{-1} \mod m \\$
+
+$E(x) = (ax+b) \mod m \\$
+$D(x) = a^{-1}(x-b) \mod m \\$
+$1 = aa^{-1} \mod m \\$
 
 So Therefore
 
-$
-D(E(x)) = a^{-1} (E(x) - b) \mod m \\
-D(E(x)) = a^{-1}(((ax+b) \mod m) - b )\mod m \\
-D(E(x)) = a^{-1}(ax+b-b) \mod m \\
-D(E(x)) = a^{-1}ax \mod m \\
-D(E(x)) = x \mod m
-$
+
+$D(E(x)) = a^{-1} (E(x) - b) \mod m \\$
+$D(E(x)) = a^{-1}(((ax+b) \mod m) - b )\mod m \\$
+$D(E(x)) = a^{-1}(ax+b-b) \mod m \\$
+$D(E(x)) = a^{-1}ax \mod m \\$
+$D(E(x)) = x \mod m$
+
 
 Here you can see the *b* is canceled out prior to the evaluation of the a and inverse a, meaning even if the a does not follow the restrictions b will still be canceled out, therefore *b* has no limitations.
+
 ### B.
 
 In order to produce distinct mapping for the Affine Caesar cipher, *b* is limited such that $ap+b \neq m$. So assuming a is a coprime of m the number created by $ap$ will not equal m, to ensure distinct mapping $ap+b$ must also not equal m.
@@ -99,10 +102,11 @@ Result
 ### C.
 
 The solution clearly illustrates the main issue with the Playfair cipher, it can obfuscate some phrases but there will always exist edge cases where some letters within the initial message could repeat. This means that if the message contains letters that are all within the same row or column, the message will not be obfuscated to the same level as a longer message with a more diverse set of letters.
+
 ### D.
 
 In order to calculate the total number of possible keys that can be produced by the Playfair Cipher, a factorial is needed. Because the Playfair Cipher is 5 x 5 then it can be determined that the total number of keys is: $$25! \approx 2^{84}$$
 
 ### E.
 
-The standard Playfair Cipher is a 5x5 square, to calculate all possibilities including possible repeats it would be factorial 25 or 25! but because we only want to know distinct keys the formula changes to: $$\frac {25!} {5^2} \approx 2^{79}$$
+The standard Playfair  Cipher is a 5x5 square, to calculate all possibilities including possible repeats it would be factorial 25 or 25! but because we only want to know distinct keys the formula changes to: $$\frac {25!} {5^2} \approx 2^{79}$$
