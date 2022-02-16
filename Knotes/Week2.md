@@ -23,3 +23,13 @@ For alice and bob one has the information and the other does not, this is a comm
 graph LR
     fa:fa-check-->fa:fa-coffee
 ```
+
+### Entropy
+
+H is the uncertainty function.
+
+$$ KP_1 \log(1/P_1)+ \ldots + KP_N \log(1/P_N) $$
+
+Dividing by K yields the average amount of information per outcome for the random variable, referred to as the entropy of *X* and designated by $H(X)$
+
+$$ H(X) = \sum_{j=1}^{N} P_j \log(1/P_j) = \sum_{j=1}^{N} P_j \log(P_j) $$
