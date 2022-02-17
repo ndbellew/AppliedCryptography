@@ -27,10 +27,17 @@ def main():
     print("Part B")
     print(Events(1, [1/6,1/6,1/6,3/6]))
     print(Events(5, [1/6,1/6,1/6,3/6]))
+    print("Part C")
+    print(Events(1, [1/6,1/6,1/6,1/6,1/6,1/6]))
+    print(Events(1, [1/6,1/6,1/6,1/6,2/6]))
+    print("Part D")
+    print(Events(1, [1]))
     print("Problem 2")
     print("Part A")
     print(Events(1, [3/9, 2/9, 4/9]))
     print(Events(30, [3/9, 2/9, 4/9]))
+    print("Part C")
+    print(Events(1, [4/11, 3/11, 4/11]))
 
 if __name__ == "__main__":
     main()
