@@ -1,5 +1,8 @@
 # Class Knotes
 
+lost all of myknotes lets go
+
+
 ## Security vs Utility/Practicality
 
 ### Secure vs. Insecure can be a spectrum. 
