@@ -73,11 +73,31 @@ The best way to create the highest entropy value is to ensure that the probabili
 
 ### F
 
-## Problem 3. Proving stuff
+## Problem 3. Proving Modular Arithmetic
 
 ### A
 
+This proof is relatively simple, plugging in the value for b into the a equation and foiling the answer. The basis of this is that if you take $\mod n$ of $\mod n$ then you will always get the exact same result. Such that $ X \mod n == X \mod n \mod n $
+
+$\begin{aligned}
+a = b (\mod n) and \; b = c (\mod n)  \therefore \;\; & a = c (\mod n) \\
+& if \; \; b = c (\mod n) then  \\
+& a = c (\mod n) (\mod n) \\
+& a = c (\mod n) (\mod n) \equiv c (\mod n) \\
+\end{aligned}$
+
 ### B
+
+To prove this I used the quotient remainder theorem to redefine a and b in terms of remainders. Below I set showed that $a = cq_1 + r_1$ and $b = cq_2 + r_2$ therefore $a \mod n = r_1$ and $b \mod n = r_2$. By setting and b to this I can prove the theorem using simple substitution once the equations are foiled. The $ (n(q_1-q_2) + r_1 - r_2)$ step is completed by removing the n due to the fact that n mod n is 0. That step leaves the remainders which as noted above should be a mod n and b mod n therein proving the Modular Subtraction Rule. 
+
+$\begin{aligned}
+& a = nq_1 + r_1 where 0 \le r_1 < n \therefore \; a \mod n = r_1 \\
+& b = nq_2 + r_2 where 0 \le r_2 < n \therefore \; b \mod n = r_2 \\
+& (a-b)\mod n = (nq_1 + r_1 - nq_2 - r_2) \mod n \\
+& (a-b)\mod n = (n(q_1-q_2) + r_1 - r_2) \mod n \\
+& (a-b)\mod n = ( r_1 - r_2) \mod n \\ 
+& (a \mod n - b \mod n) \mod n = (r_1 - r_2) \mod n
+\end{aligned}$
 
 ### C
 
@@ -87,13 +107,23 @@ programmed using Problem4.py
 
 ### A
 
+$\begin{aligned}
+
+\end{aligned}$
+
 ### B
+
+GCD(1105, 425) = 85
 
 ### C
 
+GCD(2078, 9602) = 2
+
 ### D
 
-## Problem 5 More Euclidean Algorithm
+GCD(22142, 16762) = 2
+
+## Problem 5 Extended Euclidean Algorithm
 
 ### A
 
@@ -103,7 +133,7 @@ programmed using Problem4.py
 
 ### D
 
-## Problem 6 [No Title]
+## Problem 6 Ideal Block Cipher
 
 ### A
 
