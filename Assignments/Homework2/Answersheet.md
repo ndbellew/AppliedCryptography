@@ -46,6 +46,7 @@ for value in List:
 print(EntropyValue)
 ```
 The first value will equal **1.792** the new list of values will instead make **1.573**
+
 ### D
 
 ### E
@@ -61,6 +62,8 @@ The first value will equal **1.792** the new list of values will instead make **
 ### C
 
 ## Problem 4 Euclidean Algorithm
+
+programmed using Problem4.py
 
 ### A
 
@@ -84,4 +87,7 @@ The first value will equal **1.792** the new list of values will instead make **
 
 ### A
 
+The number of reversible mappings for the ideal block cipher for a block of n bits is $ 2^n! $. For a mapping to be reversible, each block must be able to map into a unique ciphertext block. In order to enumerate all possible mappings, the block equivalent to 0 can map into any of the $2^n$ possibile blocks. The block with value 1 can map into any of the $ 2^n-1 $ possible blocks. Thus the total number of reversible mappings of an ideal block is $ 2^n! $. 
+
 ### B
+
