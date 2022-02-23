@@ -83,6 +83,8 @@ The best way to create the highest entropy value is to ensure that the probabili
 
 ## Problem 4 Euclidean Algorithm
 
+programmed using Problem4.py
+
 ### A
 
 ### B
@@ -105,4 +107,7 @@ The best way to create the highest entropy value is to ensure that the probabili
 
 ### A
 
+The number of reversible mappings for the ideal block cipher for a block of n bits is $ 2^n! $. For a mapping to be reversible, each block must be able to map into a unique ciphertext block. In order to enumerate all possible mappings, the block equivalent to 0 can map into any of the $2^n$ possibile blocks. The block with value 1 can map into any of the $ 2^n-1 $ possible blocks. Thus the total number of reversible mappings of an ideal block is $ 2^n! $. 
+
 ### B
+

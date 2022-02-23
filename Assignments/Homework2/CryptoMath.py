@@ -6,6 +6,7 @@ def Events(numOfEvents, ListOfChances):
     for eventNum in range(numOfEvents):
         Answer += Entropy(ListOfChances)
     return round(Answer, 4)
+    
 
 def Entropy(Values):
     TotalSum = 0.0
