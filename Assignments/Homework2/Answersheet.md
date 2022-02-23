@@ -27,11 +27,26 @@ The Dice should be marked `[1, 2, 3, 4, 5, 6]` to achieve a maximum entropy of $
 
 ### E
 
+Rolling two dice and only monitoring the sum means that the numbers I use will be a little different from a single die. The numbers I will be monitoring is 2-12 (it starts at 2 because you cannot roll a 1 on two dice), because the 11 possible numbers can be made from multiple combinations of dice the probability is actually over 36 possibilities instead of 11. For each die roll if you add up each combination from Die A and Die B, the number of possibilities should be 36 where there are 6 possible combinations for a sum of 7. This makes these fractions for calculating Entropy = `[1/36, 2/36, 3/36, 4/36, 5/36, 6/36, 5/36, 4/36, 3/36, 2/36,1/36]`. 
+Calculating the Entropy from this I get $3.2744$
+
 ## Problem 2. Balls in a Bin
 
 ### A
 
+In this problem there are 9 balls total, 2 are yellow, 3 are red, and 4 are green. So the set to calculate should be `[2/9,3/9,4/9]` the calculated entropy for a single event is $1.5726$
+
 ### B
+Not figured out yet
+$\begin{aligned}
+Bias(\hat{\theta})  &= E(\hat{\theta}) - \theta \\
+                    &= E(2 \bar{X} -1) - \theta \\
+                    &= \frac{2}{n}\sum_{i=1}^n E(X_i) -1 -\theta \\
+                    &= 2E(X) - 1 - \theta \\
+                    &= 2 \cdot \frac{\theta+1}{2} - 1 - \theta \\
+                    &= 0 \\
+\end{aligned}$
+
 
 ### C
 
@@ -46,9 +61,15 @@ for value in List:
 print(EntropyValue)
 ```
 The first value will equal **1.792** the new list of values will instead make **1.573**
+
 ### D
 
+The best way to create the highest entropy value is to ensure that the probability of pulling any ball is as even as possible. So to take the ball set `[4/11, 3/11, 4/11]` where there are 4 red balls, 3 yellow balls, and four green balls respectively. In maximize entropy by adding or removing a single ball of any color, a yellow ball must be added such that the set would equal `[4/12, 4/12, 4/12]`. This makes an entropy value of $1.585$
+
+
 ### E
+
+
 
 ### F
 

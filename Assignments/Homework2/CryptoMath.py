@@ -32,12 +32,17 @@ def main():
     print(Events(1, [1/6,1/6,1/6,1/6,2/6]))
     print("Part D")
     print(Events(1, [1]))
+    print("Part E")
+    print(Events(1, [1/36, 2/36, 3/36, 4/36, 5/36,6/36, 1/36, 2/36, 3/36, 4/36, 5/36]))
     print("Problem 2")
     print("Part A")
     print(Events(1, [3/9, 2/9, 4/9]))
     print(Events(30, [3/9, 2/9, 4/9]))
     print("Part C")
     print(Events(1, [4/11, 3/11, 4/11]))
+    print("Part D")
+    print(Events(1, [4/12, 4/12, 4/12]))
+    print("Part E")
 
 if __name__ == "__main__":
     main()
