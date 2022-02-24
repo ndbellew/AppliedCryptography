@@ -24,6 +24,7 @@ The Dice should be marked `[1, 2, 3, 4, 5, 6]` to achieve a maximum entropy of $
 
 ### D
 
+To minimize entropy there must be a single number that repeats as much as possible, because of this there are six possible answers for a die. Such as using `[6,6,6,6,6,6]` which should provide the smallest entropy number of $-93.0587$. 
 
 ### E
 
@@ -37,16 +38,8 @@ Calculating the Entropy from this I get $3.2744$
 In this problem there are 9 balls total, 2 are yellow, 3 are red, and 4 are green. So the set to calculate should be `[2/9,3/9,4/9]` the calculated entropy for a single event is $1.5726$
 
 ### B
-Not figured out yet
-$\begin{aligned}
-Bias(\hat{\theta})  &= E(\hat{\theta}) - \theta \\
-                    &= E(2 \bar{X} -1) - \theta \\
-                    &= \frac{2}{n}\sum_{i=1}^n E(X_i) -1 -\theta \\
-                    &= 2E(X) - 1 - \theta \\
-                    &= 2 \cdot \frac{\theta+1}{2} - 1 - \theta \\
-                    &= 0 \\
-\end{aligned}$
 
+The information entropy for n events where n is a positive integer equals the entropy of a single event multiplied by the number of desired events. As determined above the entropy of an event would be $1.5726$ so the entropy for n events would be $n \times 1.5726 $ or $1.5726n$ 
 
 ### C
 
@@ -69,9 +62,11 @@ The best way to create the highest entropy value is to ensure that the probabili
 
 ### E
 
-
+Currently the bag contains four red balls, three yellow balls and four green balls. The best way to minimize entropy is to ensure that a single value is higher than any of the other numbers and that none of the numbers have equal values. Because I can only modify a single ball, in this instance the best way to minimize entropy would be to add a red ball. This would create the set `[5/12, 3/12, 4/12]` which gives the entropy $1.5546$ which is still similar to the highest entropy answered in D.
 
 ### F
+
+Though making the probabilities of the balls as even as possible would normally maximize entropy, because a new ball can be added, adding any color would be better. Adding more complexity to the ball bag (adding another color) increases entropy more than equalizing the number of colored balls would.
 
 ## Problem 3. Proving Modular Arithmetic
 
@@ -101,16 +96,42 @@ $\begin{aligned}
 
 ### C
 
+For GCD(A,B) the new $A = BQ_1 + (B \mod A)$ and $ D = GCD(B, {A \mod B}) $
+So by putting this equation to use below and using the equation for determining the quotient. I determined that the quotient would be 0, this is because n mod n+1 is n and n - n is 0. 
+$\begin{aligned}
+& GCD(n, n+1)   \; \;  n = \frac{n - (n \mod(n+1))}{(n+1)} \times (n+1) + (n \mod{n+1}) \\
+& GCD(n, n+1)   \; \; n = 0 \times (n+1) + (n)   \; \; \; d = GCD(n+1, n) \\
+& GCD(n+1, n)   \; \; n = \frac{(n+1) - (n+1 \mod n)}{n} \times n + ((n+1) mod \; n) \\
+& GCD(n+1, n)   \; \; n = \frac{n}{n} \times n +1 \; \; \; d = GCD(n, 1) \\
+& GCD(n, 1)     \; \; n = \frac{n-(n\mod 1)}{1} \times 1 + (n \mod 1) \\
+& GCD(n, 1)     \; \; n = \frac{n}{1} \times 1 + (0) \; \; \; d = GCD(1, 0)  \\ 
+& GCD(n, n+1) = 1
+\end{aligned}$
+Because b is now equal to 0 the Common Divisor can be found as what the new A equals. 
+
 ## Problem 4 Euclidean Algorithm
 
 programmed using Problem4.py
 
 ### A
 
+First i must prove that $r_{n-1}$ (remainder) divides into both n and q through induction:
 $\begin{aligned}
-
+& n = q_1d+r_1  \\
+& d = r_1 * q_2 + r_2   \\
+& r_1 = r_2 * q_3 + r_3  \\
+r_{n-1} \; &\text{divides into} \; r_{n-3} \\
+& r_{n-3} = r_{n-2} * q_{n-1} + r_{n-1} = \\ &(r_{n-1} * q_n)* q_{n-1} + r_{n-1}= (q_n * q_{n-1} + 1) * r_{n-1} \\
+r_{n-1} \; &\text{divides into} \; r_{n-4} \\
+& r_{n-3} *q_{n-2} + r_{n-2} = (q_n * q_{n-1} + 1) * r_{n-1} * q_{n-2} + r_{n-1} * q_n = \\ &((q_n * q_{n-1} +1) * q_{n-2}+q_n) * r_{n-1}
 \end{aligned}$
-
+This pattern will continue to go on. This proves that $r_{n-1}$ divides into n and that $r_{n-1}$ divides into d. Now I would need to prove that $r_{n-1}$ is the greatest common denominator. So to prove it, let c be a common divisor for n and d.
+$\begin{aligned}
+& n = ac \; \text{and} \; d = bc \\
+& n = q_1d+r_1 \\ 
+& r_1 = n - q_1d = ac - q_1bc = (a-q_1b)c
+\end{aligned}$
+This then proves that c divides into $r_1$ which means that c is then divisible by $r_{n-1}$. It follows that the greatest common divisor g must divide into $r_{n-1}$ we then know that $r_{n-1} \le g$ and from the proofs I have shown, $g = r_{n-1}$ where g is the greatest common divisor.
 ### B
 
 GCD(1105, 425) = 85
@@ -127,6 +148,10 @@ GCD(22142, 16762) = 2
 
 ### A
 
+The Extended Euclidean Algorithm finds both the greatest common divisor d but also two additional integers x and y that satisfy $$ ax + by  = d \gcd(a,b) $$
+
+By going through the sequence of divisions, and we assume that at each step 
+
 ### B
 
 ### C
@@ -137,7 +162,7 @@ GCD(22142, 16762) = 2
 
 ### A
 
-The number of reversible mappings for the ideal block cipher for a block of n bits is $ 2^n! $. For a mapping to be reversible, each block must be able to map into a unique ciphertext block. In order to enumerate all possible mappings, the block equivalent to 0 can map into any of the $2^n$ possibile blocks. The block with value 1 can map into any of the $ 2^n-1 $ possible blocks. Thus the total number of reversible mappings of an ideal block is $ 2^n! $. 
+The number of reversible mappings for the ideal block cipher for a block of n bits is $ 2^n! $. For a mapping to be reversible, each block must be able to map into a unique ciphertext block. In order to enumerate all possible mappings, the block equivalent to 0 can map into any of the $2^n$ possible blocks. The block with value 1 can map into any of the $ 2^n-1 $ possible blocks. Thus the total number of reversible mappings of an ideal block is $ 2^n! $. 
 
 ### B
 

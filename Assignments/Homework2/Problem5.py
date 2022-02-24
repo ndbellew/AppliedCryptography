@@ -14,7 +14,7 @@ def gcdExtended(a, b):
     return gcd,x,y
 
 def main():
-    print("Problem 4")
+    print("Problem 5")
     gcdExtended( 42, 30)
     print("Part A\nCheck the Markdown Sheet")
     print("\nPart B\n")
