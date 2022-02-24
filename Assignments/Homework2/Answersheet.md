@@ -42,7 +42,7 @@ listOfValues = [3/9,2/9,4/9] #initial set of values is 9 the lists sets red, yel
 newListOfValues = [4/11, 3/11, 4/11] # set the same as the above list respectively.\
 EntropyValue = 0
 for value in List:
-    EntropyValue += Value * math.log2(1/Value)
+    EntropyValue += Value * math.log2(1/Value) # P * log_2(1/P)
 print(EntropyValue)
 ```
 The first value will equal **1.792** the new list of values will instead make **1.573**
@@ -74,6 +74,8 @@ programmed using Problem4.py
 ### D
 
 ## Problem 5 More Euclidean Algorithm
+
+Programmed using Problem5.py
 
 ### A
 
