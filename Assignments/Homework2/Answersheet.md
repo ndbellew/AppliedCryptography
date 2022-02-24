@@ -1,6 +1,13 @@
 # Homework 2
 ## Problem 1 Dice
 
+Notes to know:
+-  CryptoMath.py does my calculations for entropy to double check my maths. If i didn't show any work its because i used that program and failed to show the work in a timely manner. 
+  
+-  Problem5.py and Problem4.py solve the answers to the questions in problems 5 and 4 respectively. 
+
+- I included a markdown version of this if you need to see what I did before this was transferred to a PDF. 
+
 ### A
 
 Entropy information is calculated by finding the entropy for each event and adding all of those numbers up. This was calculated by finding the Entropy of one die and then adding that 4 times for 4 events. 
@@ -39,7 +46,7 @@ In this problem there are 9 balls total, 2 are yellow, 3 are red, and 4 are gree
 
 ### B
 
-The information entropy for n events where n is a positive integer equals the entropy of a single event multiplied by the number of desired events. As determined above the entropy of an event would be $1.5726$ so the entropy for n events would be $n \times 1.5726 $ or $1.5726n$ 
+The information entropy for n events where n is a positive integer equals the entropy of a single event multiplied by the number of desired events. As determined above the entropy of an event would be 1.5726 so the entropy for n events would be ${n \times 1.5726}$ or $1.5726n$ 
 
 ### C
 
@@ -72,7 +79,7 @@ Though making the probabilities of the balls as even as possible would normally 
 
 ### A
 
-This proof is relatively simple, plugging in the value for b into the a equation and foiling the answer. The basis of this is that if you take $\mod n$ of $\mod n$ then you will always get the exact same result. Such that $ X \mod n == X \mod n \mod n $
+This proof is relatively simple, plugging in the value for b into the a equation and foiling the answer. The basis of this is that if you take $\mod n$ of $\mod n$ then you will always get the exact same result. Such that ${X \mod n == X \mod n \mod n }$
 
 $\begin{aligned}
 a = b (\mod n) and \; b = c (\mod n)  \therefore \;\; & a = c (\mod n) \\
@@ -96,7 +103,7 @@ $\begin{aligned}
 
 ### C
 
-For GCD(A,B) the new $A = BQ_1 + (B \mod A)$ and $ D = GCD(B, {A \mod B}) $
+For GCD(A,B) the new $$ A = BQ_1 + (B \mod A)$$ and $$ D = GCD(B, {A \mod B}) $$
 So by putting this equation to use below and using the equation for determining the quotient. I determined that the quotient would be 0, this is because n mod n+1 is n and n - n is 0. 
 $\begin{aligned}
 & GCD(n, n+1)   \; \;  n = \frac{n - (n \mod(n+1))}{(n+1)} \times (n+1) + (n \mod{n+1}) \\
@@ -131,7 +138,7 @@ $\begin{aligned}
 & n = q_1d+r_1 \\ 
 & r_1 = n - q_1d = ac - q_1bc = (a-q_1b)c
 \end{aligned}$
-This then proves that c divides into $r_1$ which means that c is then divisible by $r_{n-1}$. It follows that the greatest common divisor g must divide into $r_{n-1}$ we then know that $r_{n-1} \le g$ and from the proofs I have shown, $g = r_{n-1}$ where g is the greatest common divisor.
+This then proves that c divides into $r_1$ which means that c is then divisible by $r_{n-1}$. It follows that the greatest common divisor g must divide into $r_{n-1}$ we then know that ${r_{n-1} \le g}$ and from the proofs I have shown, ${g = r_{n-1}}$ where g is the greatest common divisor.
 ### B
 
 GCD(1105, 425) = 85
@@ -152,13 +159,54 @@ Programmed using Problem5.py
 
 The Extended Euclidean Algorithm finds both the greatest common divisor d but also two additional integers x and y that satisfy $$ ax + by  = d \gcd(a,b) $$
 
-By going through the sequence of divisions, and we assume that at each step 
+First Consider the set $$ K = \{ ax+by | x,y \in {Z} \} $$
+Let K be the smallest positive elemet of K. since $k \in K$ there would then be $x,y \in {Z}$ so that $$ k = ax + by $$
+Because ${Z}$ is in the Euclidean Domain: 
+$$\begin{aligned}
+a & = qk + r \;\text{with} \;0 \le r < k \\
+  & \therefore \\
+r & = a - qk \\
+  & = q - q(ax+by) \\
+  & = a(1-qx)+b(-qy) \\
+  & \in K
+\end{aligned}$$
+
+Because k is the smallest positive element in K and it is implied that r must be 0, then ${ a = qk }$ therefore k divides a and b. The k is then a common divisor of a and b and therefore ${ k \le \gcd(a,b)}$
+
+$\gcd(a,b)$ divides both a and b and ${k = ax + by}$, $\gcd(a,b)$ divides k.
+If $\gcd(a,b)$ divides k and ${k \le \gcd(a,b)}$ therefor ${ k \equiv \gcd(a,b) }$ and since ${ k = ax + by}$ becomes: $$ \gcd(a,b) = ax + by$$
 
 ### B
 
+1 * 1 + 8 * 0 = 1
+8 * -4 + 33 * 1 = 1
+33 * 9 + 74 * -4 = 1
+74 * -13 + 107 * 9 = 1
+107 * 22 + 181 * -13 = 1
+181 * -57 + 469 * 22 = 1
+469 * 79 + 650 * -57 = 1
+650 * -215 + 1769 * 79 = 1
+
 ### C
 
+19 * 1 + 133 * 0 = 19
+133 * -6 + 817 * 1 = 19
+817 * 7 + 950 * -6 = 19
+950 * -13 + 1767 * 7 = 19
+
 ### D
+
+2 * 1 + 18 * 0 = 2
+18 * -1 + 20 * 1 = 2
+20 * 3 + 58 * -1 = 2
+58 * -4 + 78 * 3 = 2
+78 * 7 + 136 * -4 = 2
+136 * -18 + 350 * 7 = 2
+350 * 25 + 486 * -18 = 2
+486 * -93 + 1808 * 25 = 2
+1808 * 211 + 4102 * -93 = 2
+4102 * -515 + 10012 * 211 = 2
+10012 * 12056 + 234378 * -515 = 2
 
 ## Problem 6 Ideal Block Cipher
 
@@ -168,3 +216,4 @@ The number of reversible mappings for the ideal block cipher for a block of n bi
 
 ### B
 
+The reason this discrepancy exists is because the number of usable values depends on the desired output of the cipher. Though there exists $n \times 2^n$ possible mappings, these will include irreversible mappings which cannot be decrypted and therefore do not work as a cipher. By limiting ourselves to reversible mappings the number of different transformations becomes $2^n!$. So even though there exists far more possible mappings for the ideal cipher the amount that can actually be used is limited to $\log_2(2^n!)$ which is why the larger n is the more secure the cipher becomes.
