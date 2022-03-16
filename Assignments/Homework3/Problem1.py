@@ -2,6 +2,7 @@
 import os
 import time
 import datetime
+from multiprocessing import Pool
 
 def hex2bin(s):
     mp = {'0' : "0000",
@@ -56,9 +57,7 @@ def bin2hex(s):
  
 # Binary to decimal conversion
 def bin2dec(binary):
-       
-    binary1 = binary
-    decimal, i, n = 0, 0, 0
+    decimal, i = 0, 0 
     while(binary != 0):
         dec = binary % 10
         decimal = decimal + dec * pow(2, i)
@@ -85,15 +84,15 @@ def permute(k, arr, n):
     return permutation
  
 # shifting the bits towards left by nth shifts
-def shift_left(k, nth_shifts):
-    s = ""
+def shift_left(key, nth_shifts):
+    shifted = ""
     for i in range(nth_shifts):
-        for j in range(1,len(k)):
-            s = s + k[j]
-        s = s + k[0]
-        k = s
-        s = ""
-    return k   
+        for j in range(1,len(key)):
+            shifted = shifted + key[j]
+        shifted = shifted + key[0]
+        key = shifted
+        shifted = ""
+    return key  
  
 # calculating xow of two strings of binary number a and b
 def xor(a, b):
@@ -297,6 +296,13 @@ def WriteFile(File, Data):
         for data in Data:
             Writer.write(f"{data}\n")
  
+def RunMyAttempt(i):
+    file = f"{os.getcwd()}/Inputs/thisAttempt{i}.txt"
+    NumOfRounds, Key, PlainText = ReadFile(file)
+    rkb, rk = KeyGenerator(Key)
+    cipher_text = bin2hex(encrypt(PlainText, rkb, rk, NumOfRounds))
+    WriteFile(f"Inputs/MyOutput{i}.txt", [f"{i}", cipher_text])
+
 def main():
     print("Class Input 1")
     NumOfRounds, Key, PlainText = ReadFile("textFiles/class_input_1.txt")
@@ -318,16 +324,13 @@ def main():
     cipher_text = bin2hex(encrypt(PlainText, rkb, rk, NumOfRounds))
     WriteFile("textFiles/Bellew_output_3", ["3", cipher_text])
     print("Cipher Text : ",cipher_text, "\n\n\n")
-    print(os.getcwd(), os.listdir())
 
     startTime = time.time() # seconds since epoch
     print("My 1k Inputs")
-    for i in range(1000):
-        file = f"{os.getcwd()}/Inputs/thisAttempt{i}.txt"
-        NumOfRounds, Key, PlainText = ReadFile(file)
-        rkb, rk = KeyGenerator(Key)
-        cipher_text = bin2hex(encrypt(PlainText, rkb, rk, NumOfRounds))
-        WriteFile(f"Inputs/MyOutput{i}.txt", [f"{i}", cipher_text])
+    pool = Pool() # Multiprocessing Pool aka Multithreading for Python using 4 cores
+    # for i in range(1000): # done in 7.7 seconds
+    #     RunMyAttempt(i)
+    pool.map(RunMyAttempt, range(1000)) # done in 3 seconds
     EndTime = time.time() - startTime# Time since epoch now minus startTime 
     print(EndTime) # 2.26991248
     # 1000 decryptions / 2.26991248 seconds = 400.5456196267 encrypt/sec
@@ -340,5 +343,16 @@ def main():
     d, h = divmod(h, 24)
     w, d = divmod(d, 7)
     y, w = divmod(w, 52)
-    print(f"{'{:,}'.format(y)} : {w} : {h} : {m} : {s}")
-main()
+    print(f"Year {'{:,}'.format(int(y))} : Week {int(w)} : Hour {int(h)} : Min {int(m)} : Sec {int(s)}")
+
+    ## To check if my answer is correct in Problem 2 I made a file
+    print("Problem 2 Check")
+    NumOfRounds, Key, PlainText = ReadFile("textFiles/Problem2checkeroo.txt")
+    rkb, rk = KeyGenerator(Key)
+    cipher_text = bin2hex(encrypt(PlainText, rkb, rk, NumOfRounds))
+    print(f"Cipher Text : {cipher_text}\n\n\n")
+
+if __name__ == "__main__":
+    main()
+
+
