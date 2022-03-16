@@ -1,4 +1,8 @@
 # Hexadecimal to binary conversion
+import os
+import time
+import datetime
+
 def hex2bin(s):
     mp = {'0' : "0000",
           '1' : "0001",
@@ -180,7 +184,8 @@ final_perm = [ 40, 8, 48, 16, 56, 24, 64, 32,
                34, 2, 42, 10, 50, 18, 58, 26,
                33, 1, 41, 9, 49, 17, 57, 25 ]
  
-def encrypt(pt, rkb, rk):
+def encrypt(pt, rkb, rk, NumOfRounds):
+    print(pt)
     pt = hex2bin(pt)
      
     # Initial Permutation
@@ -190,7 +195,7 @@ def encrypt(pt, rkb, rk):
     # Splitting
     left = pt[0:32]
     right = pt[32:64]
-    for i in range(0, 16):
+    for i in range(0, NumOfRounds):
         #  Expansion D-box: Expanding the 32 bits data into 48 bits
         right_expanded = permute(right, exp_d, 48)
          
@@ -225,7 +230,7 @@ def encrypt(pt, rkb, rk):
     return cipher_text
  
 
-def handleKey(key): 
+def KeyGenerator(key): 
     # Key generation
     # --hex to binary
     key = hex2bin(key)
@@ -279,13 +284,61 @@ def handleKey(key):
         rkb.append(round_key)
         rk.append(bin2hex(round_key))
     return rkb, rk
+
+def ReadFile(File):
+    with open(File, 'r') as Reader:
+        NumOfRounds = int(Reader.readline().replace('\n',''))
+        Key = Reader.readline().replace('\n','')
+        Plaintext = Reader.readline().replace('\n','')
+    return NumOfRounds, Key, Plaintext
+
+def WriteFile(File, Data):
+    with open(File, 'w') as Writer:
+        for data in Data:
+            Writer.write(f"{data}\n")
  
 def main():
-    pt = "02468ACEECA86420"
-    k = "0F1571C947D9E859"
-    print("Encryption")
-    rkb, rk = handleKey(k)
-    cipher_text = bin2hex(encrypt(pt, rkb, rk))
-    print("Cipher Text : ",cipher_text)
-    
+    print("Class Input 1")
+    NumOfRounds, Key, PlainText = ReadFile("textFiles/class_input_1.txt")
+    rkb, rk = KeyGenerator(Key)
+    cipher_text = bin2hex(encrypt(PlainText, rkb, rk, NumOfRounds))
+    WriteFile("textFiles/Bellew_output_1", ["1", cipher_text])
+    print("Cipher Text : ",cipher_text, "\n\n\n")
+
+    print("Class Input 2")
+    NumOfRounds, Key, PlainText = ReadFile("textFiles/class_input_2.txt")
+    rkb, rk = KeyGenerator(Key)
+    cipher_text = bin2hex(encrypt(PlainText, rkb, rk, NumOfRounds))
+    WriteFile("textFiles/Bellew_output_2", ["2", cipher_text])
+    print("Cipher Text : ",cipher_text, "\n\n\n")
+
+    print("Class Input 3")
+    NumOfRounds, Key, PlainText = ReadFile("textFiles/class_input_3.txt")
+    rkb, rk = KeyGenerator(Key)
+    cipher_text = bin2hex(encrypt(PlainText, rkb, rk, NumOfRounds))
+    WriteFile("textFiles/Bellew_output_3", ["3", cipher_text])
+    print("Cipher Text : ",cipher_text, "\n\n\n")
+    print(os.getcwd(), os.listdir())
+
+    startTime = time.time() # seconds since epoch
+    print("My 1k Inputs")
+    for i in range(1000):
+        file = f"{os.getcwd()}/Inputs/thisAttempt{i}.txt"
+        NumOfRounds, Key, PlainText = ReadFile(file)
+        rkb, rk = KeyGenerator(Key)
+        cipher_text = bin2hex(encrypt(PlainText, rkb, rk, NumOfRounds))
+        WriteFile(f"Inputs/MyOutput{i}.txt", [f"{i}", cipher_text])
+    EndTime = time.time() - startTime# Time since epoch now minus startTime 
+    print(EndTime) # 2.26991248
+    # 1000 decryptions / 2.26991248 seconds = 400.5456196267 encrypt/sec
+    # 2^56 decrypt in how many seconds?
+    # 2^56/400.54562 = answer
+    DecPerSec = 1000/EndTime
+    Sec = 2**56/DecPerSec
+    m, s = divmod(Sec, 60)
+    h, m = divmod(m, 60)
+    d, h = divmod(h, 24)
+    w, d = divmod(d, 7)
+    y, w = divmod(w, 52)
+    print(f"{'{:,}'.format(y)} : {w} : {h} : {m} : {s}")
 main()
