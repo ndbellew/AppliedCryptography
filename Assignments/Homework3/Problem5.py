@@ -45,6 +45,10 @@ class Calculator:
     def __truediv__(self, other):
         # Steps virst you must invert the other.f by finding the multiplicative inverse usinc the 
         # Extended algorithm
+        a = self.MainFunction # [8,4,3,1,0]
+        b = other.f
+        v = [1,0]
+        w = [0,1]
         
         return "1"
 
