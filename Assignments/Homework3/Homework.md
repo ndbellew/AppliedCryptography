@@ -171,9 +171,37 @@ Multiplicative and additive inverses:
 |$w^{-1}$| - | 1 | 3 | 2 | 4 |
 
 B.
- 
+i) $x^3+1$ is reducible by $x+1$
+$
+\begin{array}{l}
+\phantom{x+1}{x^2+x+1}\\
+x+1\overline{\smash{)}x^3+1}\\
+\phantom{x+1}\underline{x^3+x^2}\\
+\phantom{{x+1}x^3+x^2}x^2+1\\
+\phantom{{x+1}x^3+x^2}\underline{x^2+x}\\
+\phantom{{x+1}x^2+x+1}x+1\\
+\phantom{{x+1}x^2+x+1}\underline{x+1}\\
+\end{array}
+$
+ii)
 
+$x^3+x^2+1$ is irreducible. If it you attempt to divide this polynomial by x or you will be unable to evenly divide the +1 part. This is also true if you attempt to divide the polynomial by $x+1$. should you attempt this you will find the answer to be $x^2$ with a remainder of 1. 
 
+iii) $x^4+1$ is reducible by $x+1$
+
+$
+\begin{array}{l}
+\phantom{x+1}{x^3+x^2+x+1}\\
+x+1\overline{\smash{)}x^4+1}\\
+\phantom{x+1}\underline{x^4+x^3}\\
+\phantom{{x+1}x^3}x^3+1\\
+\phantom{{x+1}x^3}\underline{x^3+x^2}\\
+\phantom{{x+1}x^3+x}x^2+1\\
+\phantom{{x+1}x^2+x}\underline{x^2+x}\\
+\phantom{{x+1}x^3+x+1}x+1\\
+\phantom{{x+1}x^2+x+1}\underline{x+1}\\
+\end{array}
+$
 ### Problem 4
 
 A. 
@@ -212,11 +240,11 @@ Generator for $GF(2^4)$ using $m(x) = x^4 + x + 1$
 |        $g^7$         |        $g^3+g+1$          |          1011         |               11             |
 |        $g^8$         |         $g^2+1$           |          0101         |               05             |
 |        $g^9$         |         $g^3+g$           |          1010         |               10             |
-|       $g^10$         |        $g^2+g+1$          |          0111         |               07             |
-|       $g^11$         |       $g^3+g^2+g$         |          1110         |               14             |
-|       $g^12$         |      $g^3+g^2+g+1$        |          1111         |               15             |
-|       $g^13$         |       $g^3+g^2+1$         |          1101         |               13             |
-|       $g^14$         |         $g^3+1$           |          1001         |               09             |
+|       $g^{10}$         |        $g^2+g+1$          |          0111         |               07             |
+|       $g^{11}$         |       $g^3+g^2+g$         |          1110         |               14             |
+|       $g^{12}$         |      $g^3+g^2+g+1$        |          1111         |               15             |
+|       $g^{13}$         |       $g^3+g^2+1$         |          1101         |               13             |
+|       $g^{14}$         |         $g^3+1$           |          1001         |               09             |
 
 ### Problem 5
 
