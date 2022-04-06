@@ -327,9 +327,7 @@ def main():
 
     startTime = time.time() # seconds since epoch
     print("My 1k Inputs")
-    pool = Pool() # Multiprocessing Pool aka Multithreading for Python using 4 cores
-    # for i in range(1000): # done in 7.7 seconds
-    #     RunMyAttempt(i)
+    pool = Pool() # Multiprocessing Pool aka Multithreading for Python using 8 cores
     pool.map(RunMyAttempt, range(1000)) # done in 3 seconds
     EndTime = time.time() - startTime# Time since epoch now minus startTime 
     print(EndTime) # 2.26991248

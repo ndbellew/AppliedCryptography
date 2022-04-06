@@ -7,11 +7,20 @@
 ### Problem 1
 
 A. 
+I notated the progam very well so hopefully a quick look will help. It has two core functions, one for encryption of the DES which follows the standard pattern using some functions that convert between hex, dec, and binary. The other function creates a list of all round keys that will be used to encrypt at each round.
 
 B.
+They are found in textfiles/Bellew_output_?.txt
 C. 
+I created a program called GenerateInputs.py that does this.
 D.
+1.999906301498413 seconds 
+Timed using Python's time function so its accurate. 
+
 E.
+Year 4,582,202 : Week 27 : Hour 10 : Min 41 : Sec 6
+So i took the amount of time it took to perform 1k encryptions and because the DES decryption is the same process but reversed I assumed the time for decryptions would be the same. Then i divided 1000 by the time in seconds. That gives me decryptions/second. Then I divided 2^56 (number of possible keys) by my decrypts per second and got a huge number of seconds. From there i converted seconds into minutes into hours into weeks into years. So it would take me Year 4,582,202 : Week 27 : Hour 10 : Min 41 : Sec 6 to brute force DES.
+Also to improve my time i encorporated python's version of strings (multiprocesses) so i was able to use all of my cores, previously it took 12 million years to complete. So i chunked off 8 million years!
 
 
 ### Problem 2
@@ -145,6 +154,10 @@ Which, after converting to Hex, becomes:
 
 ### Problem 3
 
+#### TABLES DID NOT LOAD PROPERLY 
+
+##### please see images for corresponding table sorry.
+
 A. 
 Addition:
 | + | 0 | 1 | 2 | 3 | 4 |
@@ -172,8 +185,7 @@ Multiplicative and additive inverses:
 
 B.
 i) $x^3+1$ is reducible by $x+1$
-$
-\begin{array}{l}
+$\begin{array}{l}
 \phantom{x+1}{x^2+x+1}\\
 x+1\overline{\smash{)}x^3+1}\\
 \phantom{x+1}\underline{x^3+x^2}\\
@@ -181,16 +193,14 @@ x+1\overline{\smash{)}x^3+1}\\
 \phantom{{x+1}x^3+x^2}\underline{x^2+x}\\
 \phantom{{x+1}x^2+x+1}x+1\\
 \phantom{{x+1}x^2+x+1}\underline{x+1}\\
-\end{array}
-$
+\end{array}$
 ii)
 
 $x^3+x^2+1$ is irreducible. If it you attempt to divide this polynomial by x or you will be unable to evenly divide the +1 part. This is also true if you attempt to divide the polynomial by $x+1$. should you attempt this you will find the answer to be $x^2$ with a remainder of 1. 
 
 iii) $x^4+1$ is reducible by $x+1$
 
-$
-\begin{array}{l}
+$\begin{array}{l}
 \phantom{x+1}{x^3+x^2+x+1}\\
 x+1\overline{\smash{)}x^4+1}\\
 \phantom{x+1}\underline{x^4+x^3}\\
@@ -200,9 +210,15 @@ x+1\overline{\smash{)}x^4+1}\\
 \phantom{{x+1}x^2+x}\underline{x^2+x}\\
 \phantom{{x+1}x^3+x+1}x+1\\
 \phantom{{x+1}x^2+x+1}\underline{x+1}\\
-\end{array}
-$
+\end{array}$
+
+
 ### Problem 4
+
+
+#### TABLES DID NOT LOAD PROPERLY 
+
+##### please see images for corresponding table sorry.
 
 A. 
 The Field GF(4) with $m(x) = x^2 + x + 1$
@@ -249,6 +265,23 @@ Generator for $GF(2^4)$ using $m(x) = x^4 + x + 1$
 ### Problem 5
 
 A.
+The program is relatively simple. 
+`__init__`
+To make it work as i imagined it i created a Calculator object class that holds the polynomial in a function variable called f. The Polynomial must look like they normally do ie $x^2+x+1$ they can be any length that could be in $GF(2^8)$. The polynomials are parsed into arrays of exponents, i did this because there are no coefficients when doing $GF(2^m)$. In the `__init__` function I also have a ConvDict variable that is used to map the different exponents back into the normal Polynomial form (so that way you don't have to figure out what [7,3,1,0] means). 
+`__add__` and `__sub__`
+Addition and subtraction work the same, they loop through one of the polynomials and append all of the exponents to the main list. That list then goes into PolyMod which runs a modulo on the list and reduces any copies so that it conforms to $GF(2^8)$ with $mod x+^8x^4+x^3+x+1$. 
+`__mul__`
+Multiply loops through the left polynomials and multiplies each number to each number in the right polynomial. This is accomlished with two for loops. Because exponential multiplicaiton really means adding the exponent numbers together, for each number in the variables F and G, they are added instead of multiplied. The output is then sent to PolyMod because more than likely more than one of the numbers is greater than 8. 
+`__truediv__`
+Divide would be able to find the inverse of the right polynomial and multiply that to the left polynomial. To find the inverse i was going to try the Extended Euclid, but I couldn't figure it out without converting everything to Binary, but then that gave me a headache so i decided i would try to brute force it. but that took just way to long so I decided to see if Simeon would go easy on me for trying and failing to do the division portion. So theoutput for all division will be 1 because i couldn't figure it out.
+`parsePolynomial`
+This converts the normal polynomial form into a list of exponents for me to work with. Just some string manipulation, didnt use Regex which probably would have looked cleaner. 
+`PolyMod`
+takes the poly array loops through each number. If the number is greater than eight it does a floor division (it rounds down) and takes that number. If that number is even then we know the answer is 0 (any even number mod 2 is 0) if its odd and is not already in the function list then it is appended. The the mod is taken and if it is not in the function list then it is added. If there is a number that is less than 8 but is in the list then it is not added and the number in the list is also removed. (this is because if at any point there are two of the same number like $2x$ that becomes 0 because $2x mod 2 = 0$)
+`PrepOutput`
+puts the polynomials back to the normal way they look.
 
-B.
+B. Should be self explanatory, i included an image of the main function reading. I did only one test because i finished this 2 hours before it was due and it was hard. 
+Problem5.png
+
 
