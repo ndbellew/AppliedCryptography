@@ -7,6 +7,7 @@ class AES:
     GF3 = list()
     RC = list()
     Table = list()
+    CompTable = list()
 
     def __init__(self):
             self.initTables()
@@ -401,19 +402,24 @@ class AES:
         # ENCRYPTS TEN ROUNDS
         TableText = ""
         state = self.initStateMatrix(plaintext)
-        self.Table.append(f"|{plaintext}| | | |{state}|")
+        self.Table.append(f"|{plaintext}| | | |{' '.join(state)}|")
         # Initial Key Addition Layer
         state = self.keyAddition(state, key)
         
 
         for round in range(10):
-
+            TableText = ""
+            self.CompTable.append(''.join(state))
+            TableText += f"|{' '.join(state)}|"
             state = self.byteSubstitution(state)
-
+            TableText += f"{' '.join(state)}|"
             state = self.shiftRows(state)
-
+            TableText += f"{' '.join(state)}|"
             if round < 9:
                 state = self.mixColumns(state)
+                TableText += f"{' '.join(state)}|"
+            else:
+                TableText += f" |"
 
             newKey = ""
             for byte in key:
@@ -423,7 +429,8 @@ class AES:
             key = newKey
 
             key = self.keySchedule(key, round)
-
+            TableText += f"{' '.join(state)}|"
+            self.Table.append(TableText)
             state = self.keyAddition(state, key)
 
         return state
@@ -466,11 +473,9 @@ def main():
             print("\n")
 
         elif inp == "2":
-            print("Please enter a 128 bit hexadecimal plaintext:")
-            plaintext = input(">  ")
+            plaintext = "1300456789abcdeffedcba9876543210"
 
-            print("Please enter a 128 bit hexadecimal key:")
-            key = input(">  ")
+            key = "0f0071c947d9e8591cb7add6af7f6798"
 
             tenRound = AESTest.encrypt(plaintext, key)
 
@@ -484,7 +489,14 @@ def main():
 
             print("\nCiphertext:")
             print(prettyCipherText)
-            print("\n")
+            with open("AESTable.txt", 'w+') as f:
+                for items in AESTest.Table:
+                    f.write('%s\n' %items)
+            with open("AvalancheTableInfo.txt", 'w+') as f:
+                for items in AESTest.CompTable:
+                    f.write('%s\n' %items)
+        
+            quit()
 
         elif inp == "3":
             FIPS197Test = AESTest.encryptFIPS197()
@@ -493,7 +505,7 @@ def main():
         elif inp == "4":
             plaintext = "1321456789abcdeffedcba9876543210"
 
-            key = "0e0071c947d9e8591cb7add6af7f6798"
+            key = "0f5571c947d9e8590cb7add6af7f6798"
 
             originalPlaintext = plaintext
             plaintext = AESTest.toHex(plaintext)

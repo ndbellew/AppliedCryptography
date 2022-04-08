@@ -137,14 +137,13 @@ def KeyExpansion(Key):
             AuxFunc.append("|Empty|")
     return AuxFunc, KeyWords, Keys
 
-
 def aes(Keys):
     pass
 
 def main():
 #   Key = "0e 00 71 c9 47 d9 e8 59 1c b7 ad d6 af 7f 67 98".split()
-    Key = "0f 15 71 c9 47 d9 e8 59 0c b7 ad d6 af 7f 67 98".split()
-    PlainText = "12 00 45 67 89 ab cd ef fe dc ba 98 76 54 32 10".split()
+    Key = "0f 55 71 c9 47 d9 e8 59 0c b7 ad d6 af 7f 67 98".split()
+    PlainText = "22 00 45 67 89 ab cd ef fe dc ba 98 76 54 32 10".split()
     Aux, KeyWords, AllKeys = KeyExpansion(Key)
     aes(AllKeys)
     Table = []
@@ -153,11 +152,6 @@ def main():
     with open("KeyExpansionTable.txt", 'w+') as f:
         for items in Table:
             f.write('%s\n' %items)
-
-
-    
-
-
 
 def chunks(lst, n):
     for i in range(0, len(lst), n):
