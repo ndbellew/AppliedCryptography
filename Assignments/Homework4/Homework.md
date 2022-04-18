@@ -180,6 +180,88 @@ e.
  
 ## Problem 3
 
+a.
+Parallel encryption is not possible since every encryption requires a previous cipher. In decryption all blocks can be processed in parallel. 
+b.
+All ciphertext blocks from $P_2$ and on will be affected .
+c.
+The error would effect all ciphertext blocks. This will cause the reciever to recieve a completely different result than what is expected.
+d.
+It is possible to perform encryption operations in parallel on multiple blocks of plaintext in CTR mode for both Encryption and Decryption.
+e.
+No, because Counter mode does not use chaining no other blocks would be affected if an error in a block of transmitted ciphertext occurs. 
+
+f.
+The only ciphertext block that would be affected is the one which the error initially propagated. Beyond that block no other blocks would be affected. The reciever would be given an incorrect value for only the ciphertext block that was affected all other outputs should be correct.
+
+
 ## Problem 4
+
+
+## Problem 5
+
+a.
+Fermat's Theorem is if *p* is prime and $a$ is a positive integer not divisible by *p* then:
+
+$$a^{p-1} \equiv 1(\mod p)$$
+
+If we consider the set of positive integers less than
+
+ *p* : $\{1,2, ..., p-1\}$
+
+We then multiply each element in the set by a modulo $p$ to get set $$X = \{a \mod p, 2a \mod p, ..., (p-1)a\mod p\}$$
+
+If we assume that $ja \equiv ka(\mod p)$ where $1 \leq j < k \leq p-1 $ then we determine that None of the elements of X is equal to zero because $p$ does not divide $a$ and no two integers in X are equal.
+
+Because $a$ is relatively prime to $p$, we can eliminate both sides of the equation:
+$$
+  \begin{equation}
+    \begin{cases}
+      a = q_1b+r_1 &  0<r_1<b \\
+      b = q_2r_1+r_2 & 0 < r_2 <r_1 \\
+      r_1 = q_3r_2+r_3 & 0 < r_3 < r_2 \\
+      \vdots & \vdots \\
+      r_{n-2} = q_nr_{n-1}+r_n & 0 < r_n < r_{n-1} \\
+      r_{n-1} = q_{n+1}r_n + 0 \\
+      d = gcd(a,b) = r_n
+    \end{cases}
+  \end{equation}
+$$
+
+which results in $j \equiv k(\mod p)$. This last equality is impossible, because $j$ and $k$ are both positive integers less than $p$. 
+$$\therefore$$
+We know that the $(p - 1)$ elements of X are all positive integers with no two elements equal. Thus the X consists of the set of integers ${1,2, ..., p-1}$ in some order. Multiplying the numbers in both sets (p and X) and taking the result mod *p* yields.
+$$ 
+  a \times 2a \times \cdots \times (p-1)a \equiv [(1 \times 2 \times \cdots \times (p-1))](\mod p) \\ 
+  a^{p-1}(p-1)! \equiv (p-1)!(\mod p) \\
+  a^{p-1} \equiv 1(\mod p)
+$$
+
+b.
+Euler's theorem states that for every $a$ and $n$ that are relatively prime:
+$$ a^{\phi (n)} \equiv 1(\mod n) $$
+
+the above equation is true if $n$ is prime, because in that case, $\phi(n) = (n-1)$ and Fermat's theorem holds. It will also hold for any integer $n$. Recall that $\phi (n) $ is the number of positive integers less than $n$ that are relatively prime to $n$. If we consider a set of R integers:
+$$ R = \{x_1, x_2, . . ., x_{\phi (n)} \}$$
+That is, each element $x_i$ of R is a unique positive integer less than $n$ with $\gcd(x_i, n) = 1$. We then multiply each element by $a \mod n$:
+$$ S = \{(ax_1 \mod n), (ax_2 \mod n_), . . . , (ax_{\phi (n)} \mod n)\}$$
+
+The set S is a permutation of R, by the following line of reasoning
+1. Because $a$ is relatively prime to $n$ and $x_i$ is prime to $n$, $ax_1$ must also be relatively prime to $n$. Thus, all the members of S are integers that are less than $n$ and that are relatively prime to $n$.
+2. There are no duplicates in S. If we examine equation 2.5 $if (a \times b) \equiv (a \times c) (\mod n) then \space b \equiv c(\mod n)if \space a$ is relatively prime to *n*. If $ax_i \mod n = ax_j \mod n, then \space x_i = x_j$
+$$ \therefore $$
+$$
+\underset{i=1}{\overset{\phi(n)}{\Pi}}(ax_i \mod n) = \underset{i=1}{\overset{\phi(n)}{\Pi}} x_i \\
+\underset{i=1}{\overset{\phi(n)}{\Pi}}ax_i \equiv underset{i=1}{\overset{\phi(n)}{\Pi}}x_i(\mod n) \\
+a^{\phi(n)} \times [\underset{i=1}{\overset{\phi(n)}{\Pi}}x_i] \equiv x_i (\mod n) \\
+a^{\phi(n)} \equiv 1(\mod n)
+$$
+
+c.
+Suppose $n > 2$. If $n$ has an odd prime factor, say $p$; then $$n=p^km, (m,p) = 1$$ and
+$$\varphi(n) = \varphi(p^k)\varphi(m) = (p-1)p^{k-1}\varphi(m)$$
+with $p-1$ even. If $n$ has no odd prime factors then $n = 2^k$ with $k>1$ so $\varphi(2^k) = 2^{k-1}$ is even.
+In short
+ if $\gcd(k,n)=1$, then $\gcd(n−k,n)=1$ as well, so (for n>2) all the numbers relatively prime to n can be matched up into pairs $\{k,n−k\}$. So $\phi(n)$ is even.
 
 ## Problem 6
