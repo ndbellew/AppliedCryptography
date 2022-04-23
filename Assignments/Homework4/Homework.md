@@ -127,6 +127,7 @@ Key Expansion:
 |W40 = W36 $\oplus$ z = b4 8e f3 52<br>W41 = W40 $\oplus$ W37  = ba 98 13 4e<br>W42 = W41 $\oplus$ W38  = 7f 4d 59 20<br>W43 = W42 $\oplus$ W39  = 86 26 18 76|Empty|
 
 AES:
+
 | Start of Round| After SubBytes| After Shift Rows| After MixColumns| RoundKey|
 |---------------|----------------|------------------|------------------|----|
 |2200456789abcdeffedcba9876543210| | | |22 00 45 67 89 ab cd ef fe dc ba 98 76 54 32 10|
@@ -164,17 +165,17 @@ e.
 
 | Round| | Number of Bits|
 |-----|--|--------------|
-| |1200456789abcdeffedcba9876543210<br>1200456789abcdeffedcba9876543310| 1|
-|0|1200456789abcdeffedcba9876543210<br>1200456789abcdeffedcba9876543310| 1|
-|1|1d0034aece7225b6e26b174ed92b5588<br>1d0034aece7225b6e26b174ed92b5488| 1|
-|2|7b6e7f640fd2ff3ff2ecf9f9f7094cfa<br>7b6e7f64d3ad5ce3f2ecf9f9f7094cfa| 21|
-|3|ce11a191a8499b964df86eeb2d11b8ed<br>ae5181b188598ba6299cc22371f500b1| 39|
-|4|64a8e7e4384ffa688b6b51e66abc7e8a<br>9674ab3ec834a6602113c8058fd54ef8| 65|
-|5|bc8d55329e6fae08e6b5cb30b96a5044<br>b80929875a209651b42d3eca4745575f| 65|
-|6|94c5db6a304c88c61d25c50038516df6<br>decaeb706acf7c6f17f420e92ff3bf3f| 59|
-|7|5b44e5f5c59baf88545ecb78a9cd3e84<br>fd2202683589b490cf45c730497aca4e| 62|
-|8|1d3b28c74ace8076422143b967af6c68<br>a02bcffa1560ef8bae083ec663f32c5c| 72|
-|9|e631cbf6f001f5fbd16e7ac78be99a9e<br>242f8ed77387d3507d92ae44b265eec2| 58|
+|  |1200456789abcdeffedcba9876543210<br>1200456789abcdeffedcba9876543310| 1|
+|0 |1200456789abcdeffedcba9876543210<br>1200456789abcdeffedcba9876543310| 1|
+|1 |1d0034aece7225b6e26b174ed92b5588<br>1d0034aece7225b6e26b174ed92b5488| 1|
+|2 |7b6e7f640fd2ff3ff2ecf9f9f7094cfa<br>7b6e7f64d3ad5ce3f2ecf9f9f7094cfa| 21|
+|3 |ce11a191a8499b964df86eeb2d11b8ed<br>ae5181b188598ba6299cc22371f500b1| 39|
+|4 |64a8e7e4384ffa688b6b51e66abc7e8a<br>9674ab3ec834a6602113c8058fd54ef8| 65|
+|5 |bc8d55329e6fae08e6b5cb30b96a5044<br>b80929875a209651b42d3eca4745575f| 65|
+|6 |94c5db6a304c88c61d25c50038516df6<br>decaeb706acf7c6f17f420e92ff3bf3f| 59|
+|7 |5b44e5f5c59baf88545ecb78a9cd3e84<br>fd2202683589b490cf45c730497aca4e| 62|
+|8 |1d3b28c74ace8076422143b967af6c68<br>a02bcffa1560ef8bae083ec663f32c5c| 72|
+|9 |e631cbf6f001f5fbd16e7ac78be99a9e<br>242f8ed77387d3507d92ae44b265eec2| 58|
 |10|f6bff8c82a8f297d294f9782539562a7<br>30bd25129bd015a01f7eed377766dd4a| 74|
   
  
@@ -196,6 +197,38 @@ The only ciphertext block that would be affected is the one which the error init
 
 
 ## Problem 4
+
+a. We know that $P(0) = 0.5 - \vartheta $ and $P(1) = 0.5 + \vartheta $, thus we can derive:
+|Pair| Probability|
+|--|--|
+|00|$ (0.5 - \vartheta)^2 = 0.25 - \vartheta + \vartheta^2 $|
+|01|$ (0.5 - \vartheta) \times (0.5 + \vartheta) = 0.25 - \vartheta^2 $|
+|10|$ (0.5 + \vartheta) \times (0.5 - \vartheta) = 0.25 - \vartheta^2 $|
+|11|$ (0.5 + \vartheta)^2 = 0.25 - \vartheta + \vartheta^2 $|
+
+b.
+Because the pairs 01 and 10 have equal probability within the initial sequence, the modified sequence will convert these to 0 and 1, thus P'(0) = P'(1)=0.5
+
+c.
+The probability of a pair being discarded is equal to the probability that a pair is either 00 or 11, so $P(00) + P(11) = (0.25 - \vartheta + \vartheta^2) + (0.25+\vartheta+\vartheta^2) = 0.5 + 2\vartheta^2$.
+Thus, the expected number of bits to produce x output bits is as follows:
+$2x/(0.5-2\vartheta^2)$
+$=x/(.25-\vartheta^2)$ input bits
+
+d.
+By making the modified sequence consider overlapping pairs of bits, the output bit stream will be a sequence of alternating 1's and 0's which is completely predictable.
+
+e.
+For the sequence of input bits $a_1, a_2, . . ., a_n$ the output bit is defined as $\oplus$
+$$ b = a_1 \oplus a_2 \oplus . . . \oplus a_n $$
+
+f.
+if each group consists of 2 bits, then the probability of an output being 1 will now be:
+$$ 0.5 - 2\vartheta^2 $$
+
+g.
+If each group consists of 4 bits, then the probability of an output being 1 will now be:
+$$ 0.5 - 8 \vartheta^4 $$
 
 
 ## Problem 5
@@ -252,7 +285,7 @@ The set S is a permutation of R, by the following line of reasoning
 $$ \therefore $$
 $$
 \underset{i=1}{\overset{\phi(n)}{\Pi}}(ax_i \mod n) = \underset{i=1}{\overset{\phi(n)}{\Pi}} x_i \\
-\underset{i=1}{\overset{\phi(n)}{\Pi}}ax_i \equiv underset{i=1}{\overset{\phi(n)}{\Pi}}x_i(\mod n) \\
+\underset{i=1}{\overset{\phi(n)}{\Pi}}ax_i \equiv \underset{i=1}{\overset{\phi(n)}{\Pi}}x_i(\mod n) \\
 a^{\phi(n)} \times [\underset{i=1}{\overset{\phi(n)}{\Pi}}x_i] \equiv x_i (\mod n) \\
 a^{\phi(n)} \equiv 1(\mod n)
 $$
@@ -265,3 +298,26 @@ In short
  if $\gcd(k,n)=1$, then $\gcd(n−k,n)=1$ as well, so (for n>2) all the numbers relatively prime to n can be matched up into pairs $\{k,n−k\}$. So $\phi(n)$ is even.
 
 ## Problem 6
+
+a.
+|a|a^2|a^3|a^4|a^5|a^6|a^7|a^8|a^9|a^10|a^11|a^12|
+|-|-|-|-|-----|---|--|----|---|---|----|----|----|
+|1|1|1|1|1|1|1|1|1|1|1|1|
+|2|4|8|3|6|12|11|9|5|10|7|1|
+|3|9|1|3|9|1|3|9|1|3|9|1|
+|4|3|12|9|10|1|4|3|12|9|10|1|
+|5|12|8|1|5|12|8|1|5|12|8|1|
+|6|10|8|9|2|12|7|3|5|4|11|1|
+|7|10|5|9|11|12|6|3|8|4|2|1|
+|8|12|5|1|8|12|5|1|8|12|5|1|
+|9|3|1|9|3|1|9|3|1|9|3|1|
+|10|9|12|3|4|1|10|9|12|3|4|1|
+|11|4|5|3|7|12|2|9|8|10|6|1|
+|12|1|12|1|12|1|12|1|12|1|12|1|
+
+b.
+
+|Discrete | Logarithms|to |the  | base  | 2 |Modulo |  29 | | | | | | | | | | | | | | | | | | | | | |
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|a| 1| 2| 3| 4| 5| 6| 7| 8| 9| 10| 11| 12| 13| 14| 15| 16| 17| 18| 19| 20| 21| 22| 23| 24| 25| 26| 27| 28|
+|$\log_{2,29}(a)$|0|1|5|2|22|6|12|3|10|23|25|7|18|13|27|4|21|11|9|24|17|26|20|8|16|19|15|14|
