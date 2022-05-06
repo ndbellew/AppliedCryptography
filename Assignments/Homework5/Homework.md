@@ -185,7 +185,71 @@ If the attacker has both public keys, the attacker is able to calculate their ow
 ## Problem 4
 
 A. 
-No, collision-resistant means that 
+No, there could be an H(x) such that $H(x) = H(x')$ but to find such a pair would be computationally infeasible. Though it is collision-resistant collisions still occur but it is very difficult to find.
+
+B.
+Weak collision resistance is made through a one-way function and made such that  a given message $x_1$ it is hard to find a second message $x_2 \neq x_1$ with $H(x_1) = H(x_2)$. The hash is made to be as complex as possible which can be somewhat taxing on the system. Strong collision resistance takes less time to produce than weak collision resistance, it also ensures that obvious hash collisions do not exist. this makes Strong Collision resistance faster and better than weak collision resistance.
+
+C.
+
 ## Problem 5
 
+A.
+```py
+def SHR(n, x):
+    temp = ""
+    for i in range(len(n)):
+        temp += "0"
+    cap = len(x)
+    i = n-1
+    while temp < cap:
+        temp += x[i]
+        i += 1
+    return temp
+
+def XOR(a,b):
+    c = ""
+    for i in range(len(a)):
+        if a[i] == b[i]:
+            c += "0"
+        else:
+            c += "1"
+
+def Sigma0(n, x):
+    Rotated = XOR(ROTR(1,x), ROTR(8,x))
+    shifted = XOR(Rotated, SHR(7,x))
+    return shifted
+
+def Sigma1(x):
+    Rotated = XOR(ROTR(19,x), ROTR(61,x))
+    shifted = XOR(Rotated, SHR(6,x))
+    return shifted
+
+def ROTR(n,x):
+    temp = (n * -1) % len(x)
+    res = x[temp :] + x[ : temp]
+    return res
+
+def BuildW(M):
+    W = []
+    for t in range(80):
+        if t <= 15:
+            # Buffers the first 15 Ws
+            W[t] = M[t:(t+1)*64]
+        else:
+            # SImplifiied addition, should be its own script beacuse after each addition 
+            # Mod 2^64 needs to be done but for visual purposes i did this.
+            W[t] = (Sigma1(W[t-2]) + W[t-7] + Sigma0(W[t-15]) + W[t-16]) % 2**64
+```
+
+B.
+Because t is larger than 15 we know that the 16 buffer is already created so these $W_t$ can be calculated using the equation 
+$$W_{t} = \sigma_1^{512}(W_{t-2})+W_{t-7}+ \sigma_0^{512}(W_{t-15}) + W_{t-16}$$
+$W_{16} = \sigma_1^{512}(W_{14})+W_{9}+ \sigma_0^{512}(W_{1}) + W_{0}$
+$W_{17} = \sigma_1^{512}(W_{15})+W_{10}+ \sigma_0^{512}(W_{2}) + W_{1}$
+$W_{18} = \sigma_1^{512}(W_{16})+W_{11}+ \sigma_0^{512}(W_{3}) + W_{2}$
+$W_{19} = \sigma_1^{512}(W_{17})+W_{12}+ \sigma_0^{512}(W_{4}) + W_{3}$
+
 ## Problem 6
+
+A. 
