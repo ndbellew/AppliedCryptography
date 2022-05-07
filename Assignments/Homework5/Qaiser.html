@@ -1,0 +1,308 @@
+<ol type="a">
+<li></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Key Generation by Alice</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select p, q</td>
+<td>p=3 &amp; q=11</td>
+</tr>
+<tr class="even">
+<td>Calculat n</td>
+<td>n = 33</td>
+</tr>
+<tr class="odd">
+<td>Calculate <span class="math inline"><em>ϕ</em></span>(n)</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>Select Integer e</td>
+<td>gcd<span class="math inline">(<em>ϕ</em>(<em>n</em>), 7) = 1; 1 &lt; 7 &lt; <em>ϕ</em>(<em>n</em>)</span></td>
+</tr>
+<tr class="odd">
+<td>Calculate d</td>
+<td>0.14285714285714285</td>
+</tr>
+<tr class="even">
+<td>Public Key</td>
+<td>PU = (7,33)</td>
+</tr>
+<tr class="odd">
+<td>Private Key</td>
+<td>PR = (0.14285714285714285,33)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Encryption by Bob with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plaintext</td>
+<td>M=5 &lt; n=33</td>
+</tr>
+<tr class="even">
+<td>Ciphertext</td>
+<td>C=14; <span class="math inline"><em>C</em> = <em>M</em><sup><em>e</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Decryption By Alice with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ciphertext:</td>
+<td>C=14</td>
+</tr>
+<tr class="even">
+<td>Plaintext:</td>
+<td>M=5; <span class="math inline"><em>M</em> = <em>C</em><sup><em>d</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Key Generation by Alice</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select p, q</td>
+<td>p=7 &amp; q=11</td>
+</tr>
+<tr class="even">
+<td>Calculat n</td>
+<td>n = 77</td>
+</tr>
+<tr class="odd">
+<td>Calculate <span class="math inline"><em>ϕ</em></span>(n)</td>
+<td>60</td>
+</tr>
+<tr class="even">
+<td>Select Integer e</td>
+<td>gcd<span class="math inline">(<em>ϕ</em>(<em>n</em>), 17) = 1; 1 &lt; 17 &lt; <em>ϕ</em>(<em>n</em>)</span></td>
+</tr>
+<tr class="odd">
+<td>Calculate d</td>
+<td>0.058823529411764705</td>
+</tr>
+<tr class="even">
+<td>Public Key</td>
+<td>PU = (17,77)</td>
+</tr>
+<tr class="odd">
+<td>Private Key</td>
+<td>PR = (0.058823529411764705,77)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Encryption by Bob with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plaintext</td>
+<td>M=8 &lt; n=77</td>
+</tr>
+<tr class="even">
+<td>Ciphertext</td>
+<td>C=57; <span class="math inline"><em>C</em> = <em>M</em><sup><em>e</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Decryption By Alice with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ciphertext:</td>
+<td>C=57</td>
+</tr>
+<tr class="even">
+<td>Plaintext:</td>
+<td>M=8; <span class="math inline"><em>M</em> = <em>C</em><sup><em>d</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<ol start="3" type="a">
+<li></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Key Generation by Alice</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select p, q</td>
+<td>p=11 &amp; q=13</td>
+</tr>
+<tr class="even">
+<td>Calculat n</td>
+<td>n = 143</td>
+</tr>
+<tr class="odd">
+<td>Calculate <span class="math inline"><em>ϕ</em></span>(n)</td>
+<td>120</td>
+</tr>
+<tr class="even">
+<td>Select Integer e</td>
+<td>gcd<span class="math inline">(<em>ϕ</em>(<em>n</em>), 9) = 1; 1 &lt; 9 &lt; <em>ϕ</em>(<em>n</em>)</span></td>
+</tr>
+<tr class="odd">
+<td>Calculate d</td>
+<td>0.1111111111111111</td>
+</tr>
+<tr class="even">
+<td>Public Key</td>
+<td>PU = (9,143)</td>
+</tr>
+<tr class="odd">
+<td>Private Key</td>
+<td>PR = (0.1111111111111111,143)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Encryption by Bob with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plaintext</td>
+<td>M=7 &lt; n=143</td>
+</tr>
+<tr class="even">
+<td>Ciphertext</td>
+<td>C=8; <span class="math inline"><em>C</em> = <em>M</em><sup><em>e</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Decryption By Alice with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ciphertext:</td>
+<td>C=8</td>
+</tr>
+<tr class="even">
+<td>Plaintext:</td>
+<td>M=7; <span class="math inline"><em>M</em> = <em>C</em><sup><em>d</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<ol start="4" type="a">
+<li></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Key Generation by Alice</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select p, q</td>
+<td>p=17 &amp; q=31</td>
+</tr>
+<tr class="even">
+<td>Calculat n</td>
+<td>n = 527</td>
+</tr>
+<tr class="odd">
+<td>Calculate <span class="math inline"><em>ϕ</em></span>(n)</td>
+<td>480</td>
+</tr>
+<tr class="even">
+<td>Select Integer e</td>
+<td>gcd<span class="math inline">(<em>ϕ</em>(<em>n</em>), 7) = 1; 1 &lt; 7 &lt; <em>ϕ</em>(<em>n</em>)</span></td>
+</tr>
+<tr class="odd">
+<td>Calculate d</td>
+<td>0.14285714285714285</td>
+</tr>
+<tr class="even">
+<td>Public Key</td>
+<td>PU = (7,527)</td>
+</tr>
+<tr class="odd">
+<td>Private Key</td>
+<td>PR = (0.14285714285714285,527)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Encryption by Bob with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plaintext</td>
+<td>M=2 &lt; n=527</td>
+</tr>
+<tr class="even">
+<td>Ciphertext</td>
+<td>C=128; <span class="math inline"><em>C</em> = <em>M</em><sup><em>e</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Decryption By Alice with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ciphertext:</td>
+<td>C=128</td>
+</tr>
+<tr class="even">
+<td>Plaintext:</td>
+<td>M=2; <span class="math inline"><em>M</em> = <em>C</em><sup><em>d</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>

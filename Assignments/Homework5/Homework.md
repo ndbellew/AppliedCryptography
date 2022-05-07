@@ -195,52 +195,14 @@ C.
 ## Problem 5
 
 A.
-```py
-def SHR(n, x):
-    temp = ""
-    for i in range(len(n)):
-        temp += "0"
-    cap = len(x)
-    i = n-1
-    while temp < cap:
-        temp += x[i]
-        i += 1
-    return temp
+Assume an array of sixteen 64-bit words W[0], ..., W[15], which will be treated as a circular queue. Define MASK as 00000000F in hex and round for t:
+$
+s = t^{MASK};
+$
+if $(t\leq 16)$ then
+$W_s = W_s \oplus \sigma_0(W_{(s+1)^{MASK}}) \oplus W_{(s+9)^{MASK}}\oplus \sigma_1(W_{(s+14)^{MASK}})$
 
-def XOR(a,b):
-    c = ""
-    for i in range(len(a)):
-        if a[i] == b[i]:
-            c += "0"
-        else:
-            c += "1"
-
-def Sigma0(n, x):
-    Rotated = XOR(ROTR(1,x), ROTR(8,x))
-    shifted = XOR(Rotated, SHR(7,x))
-    return shifted
-
-def Sigma1(x):
-    Rotated = XOR(ROTR(19,x), ROTR(61,x))
-    shifted = XOR(Rotated, SHR(6,x))
-    return shifted
-
-def ROTR(n,x):
-    temp = (n * -1) % len(x)
-    res = x[temp :] + x[ : temp]
-    return res
-
-def BuildW(M):
-    W = []
-    for t in range(80):
-        if t <= 15:
-            # Buffers the first 15 Ws
-            W[t] = M[t:(t+1)*64]
-        else:
-            # SImplifiied addition, should be its own script beacuse after each addition 
-            # Mod 2^64 needs to be done but for visual purposes i did this.
-            W[t] = (Sigma1(W[t-2]) + W[t-7] + Sigma0(W[t-15]) + W[t-16]) % 2**64
-```
+I also wrote a computer program in python that was a lot longer. 
 
 B.
 Because t is larger than 15 we know that the 16 buffer is already created so these $W_t$ can be calculated using the equation 
@@ -253,3 +215,11 @@ $W_{19} = \sigma_1^{512}(W_{17})+W_{12}+ \sigma_0^{512}(W_{4}) + W_{3}$
 ## Problem 6
 
 A. 
+
+
+B.
+
+For one-block message, the MAC using CBC-MAC is T=MAC(K,X) where X is a message and K is a secret key. 
+As for the two-block message in which the first block X and the second block $X \oplus T$. Therefore the MAC is given by: $$E(K(T\oplus(X\oplus T))) = E(K,X) = T$$
+
+![Problem6b](Problem6b.png)
