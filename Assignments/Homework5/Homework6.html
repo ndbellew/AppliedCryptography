@@ -1,0 +1,415 @@
+<h1 id="homework-5">Homework 5</h1>
+<h2 id="problem-1">Problem 1</h2>
+<ol type="a">
+<li><table>
+<thead>
+<tr class="header">
+<th>Key Generation by Alice</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select p, q</td>
+<td>p=3 &amp; q=11</td>
+</tr>
+<tr class="even">
+<td>Calculat n</td>
+<td>n = 33</td>
+</tr>
+<tr class="odd">
+<td>Calculate <span class="math inline"><em>ϕ</em></span>(n)</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>Select Integer e</td>
+<td>gcd<span class="math inline">(<em>ϕ</em>(<em>n</em>), 7) = 1; 1 &lt; 7 &lt; <em>ϕ</em>(<em>n</em>)</span></td>
+</tr>
+<tr class="odd">
+<td>Calculate d</td>
+<td>0.14285714285714285</td>
+</tr>
+<tr class="even">
+<td>Public Key</td>
+<td>PU = (7,33)</td>
+</tr>
+<tr class="odd">
+<td>Private Key</td>
+<td>PR = (0.14285714285714285,33)</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Encryption by Bob with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plaintext</td>
+<td>M=5 &lt; n=33</td>
+</tr>
+<tr class="even">
+<td>Ciphertext</td>
+<td>C=14; <span class="math inline"><em>C</em> = <em>M</em><sup><em>e</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Decryption By Alice with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ciphertext:</td>
+<td>C=14</td>
+</tr>
+<tr class="even">
+<td>Plaintext:</td>
+<td>M=5; <span class="math inline"><em>M</em> = <em>C</em><sup><em>d</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="a">
+<li><table>
+<thead>
+<tr class="header">
+<th>Key Generation by Alice</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select p, q</td>
+<td>p=7 &amp; q=11</td>
+</tr>
+<tr class="even">
+<td>Calculat n</td>
+<td>n = 77</td>
+</tr>
+<tr class="odd">
+<td>Calculate <span class="math inline"><em>ϕ</em></span>(n)</td>
+<td>60</td>
+</tr>
+<tr class="even">
+<td>Select Integer e</td>
+<td>gcd<span class="math inline">(<em>ϕ</em>(<em>n</em>), 17) = 1; 1 &lt; 17 &lt; <em>ϕ</em>(<em>n</em>)</span></td>
+</tr>
+<tr class="odd">
+<td>Calculate d</td>
+<td>0.058823529411764705</td>
+</tr>
+<tr class="even">
+<td>Public Key</td>
+<td>PU = (17,77)</td>
+</tr>
+<tr class="odd">
+<td>Private Key</td>
+<td>PR = (0.058823529411764705,77)</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Encryption by Bob with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plaintext</td>
+<td>M=8 &lt; n=77</td>
+</tr>
+<tr class="even">
+<td>Ciphertext</td>
+<td>C=57; <span class="math inline"><em>C</em> = <em>M</em><sup><em>e</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Decryption By Alice with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ciphertext:</td>
+<td>C=57</td>
+</tr>
+<tr class="even">
+<td>Plaintext:</td>
+<td>M=8; <span class="math inline"><em>M</em> = <em>C</em><sup><em>d</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<ol start="3" type="a">
+<li><table>
+<thead>
+<tr class="header">
+<th>Key Generation by Alice</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select p, q</td>
+<td>p=11 &amp; q=13</td>
+</tr>
+<tr class="even">
+<td>Calculat n</td>
+<td>n = 143</td>
+</tr>
+<tr class="odd">
+<td>Calculate <span class="math inline"><em>ϕ</em></span>(n)</td>
+<td>120</td>
+</tr>
+<tr class="even">
+<td>Select Integer e</td>
+<td>gcd<span class="math inline">(<em>ϕ</em>(<em>n</em>), 9) = 1; 1 &lt; 9 &lt; <em>ϕ</em>(<em>n</em>)</span></td>
+</tr>
+<tr class="odd">
+<td>Calculate d</td>
+<td>0.1111111111111111</td>
+</tr>
+<tr class="even">
+<td>Public Key</td>
+<td>PU = (9,143)</td>
+</tr>
+<tr class="odd">
+<td>Private Key</td>
+<td>PR = (0.1111111111111111,143)</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Encryption by Bob with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plaintext</td>
+<td>M=7 &lt; n=143</td>
+</tr>
+<tr class="even">
+<td>Ciphertext</td>
+<td>C=8; <span class="math inline"><em>C</em> = <em>M</em><sup><em>e</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Decryption By Alice with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ciphertext:</td>
+<td>C=8</td>
+</tr>
+<tr class="even">
+<td>Plaintext:</td>
+<td>M=7; <span class="math inline"><em>M</em> = <em>C</em><sup><em>d</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<ol start="4" type="a">
+<li><table>
+<thead>
+<tr class="header">
+<th>Key Generation by Alice</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select p, q</td>
+<td>p=17 &amp; q=31</td>
+</tr>
+<tr class="even">
+<td>Calculat n</td>
+<td>n = 527</td>
+</tr>
+<tr class="odd">
+<td>Calculate <span class="math inline"><em>ϕ</em></span>(n)</td>
+<td>480</td>
+</tr>
+<tr class="even">
+<td>Select Integer e</td>
+<td>gcd<span class="math inline">(<em>ϕ</em>(<em>n</em>), 7) = 1; 1 &lt; 7 &lt; <em>ϕ</em>(<em>n</em>)</span></td>
+</tr>
+<tr class="odd">
+<td>Calculate d</td>
+<td>0.14285714285714285</td>
+</tr>
+<tr class="even">
+<td>Public Key</td>
+<td>PU = (7,527)</td>
+</tr>
+<tr class="odd">
+<td>Private Key</td>
+<td>PR = (0.14285714285714285,527)</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>Encryption by Bob with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plaintext</td>
+<td>M=2 &lt; n=527</td>
+</tr>
+<tr class="even">
+<td>Ciphertext</td>
+<td>C=128; <span class="math inline"><em>C</em> = <em>M</em><sup><em>e</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>Decryption By Alice with Alice’s Public Key</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ciphertext:</td>
+<td>C=128</td>
+</tr>
+<tr class="even">
+<td>Plaintext:</td>
+<td>M=2; <span class="math inline"><em>M</em> = <em>C</em><sup><em>d</em></sup>mod <em>n</em></span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="problem-2">Problem 2</h2>
+<ol type="a">
+<li><p>$ M = C^{d} n \ C = 10; e = 5; n = 35 \ M &lt; n$ with this I Brute Forced M and found that M = 5.</p></li>
+<li><p>$e = 31 ; n = 3599 \ d = e^{-1}mod (n) \ (n) = (p-1)(q-1) $ Factors of e and n: (1, 3599), (59, 61)</p></li>
+</ol>
+<p>Using (59, 61) first (seems to be best choice) $ (n) = 3480 $ Extended Euclidean Algorithm of gcd(<span class="math inline"><em>ϕ</em>(<em>n</em>)</span>,e) = 1 where x = a and y = -449. y is the multiplicative inverse of e because e*y mod <span class="math inline"><em>ϕ</em>(<em>n</em>)</span> = 1 Therefore d = -449 Thus the Private Key PR is PR = {-449, 3599}</p>
+<ol start="3" type="a">
+<li></li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th>i</th>
+<th>9</th>
+<th>8</th>
+<th>7</th>
+<th>6</th>
+<th>5</th>
+<th>4</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline"><em>b</em><sub><em>i</em></sub></span></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>c</td>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>9</td>
+<td>18</td>
+<td>37</td>
+<td>74</td>
+<td>149</td>
+<td>298</td>
+<td>596</td>
+</tr>
+<tr class="odd">
+<td>f</td>
+<td>5</td>
+<td>25</td>
+<td>625</td>
+<td>937</td>
+<td>595</td>
+<td>569</td>
+<td>453</td>
+<td>591</td>
+<td>59</td>
+<td>1013</td>
+</tr>
+</tbody>
+</table>
+<h2 id="problem-3">Problem 3</h2>
+<ol type="A">
+<li><p>$ Y_a = 58 \ Y_a = ^{X_a} q \ Y_a = 7^4 71 \ Y_a = 2401 71 \ Y_a = 58 $</p></li>
+<li><p>$ Y_b = 31 \ Y_b = ^{X_b} q \ Y_b = 7^{11} 71 \ Y_b = 1977326743 71 \ Y_b = 31 $</p></li>
+<li><p>$ K = 24 \ K = (Y_b)^{X_a} q \ K = (31)^4 71 \ K = 923521 71 \ K = 24 $</p></li>
+<li><p><span class="math inline">2<sup>1</sup> = 2<sup>0</sup> × 2 ≡ 1 × 2 = 2 ≡ 1(mod 7)</span> <span class="math inline">2<sup>2</sup> = 2<sup>1</sup> × 2 ≡ 2 × 2 = 2 ≡ 2(mod 7)</span> <span class="math inline">2<sup>3</sup> = 2<sup>2</sup> × 2 ≡ 4 × 2 = 2 ≡ 4(mod 7)</span> <span class="math inline">2<sup>4</sup> = 2<sup>3</sup> × 2 ≡ 8 × 2 = 2 ≡ 8(mod 7)</span> <span class="math inline">2<sup>5</sup> = 2<sup>4</sup> × 2 ≡ 16 × 2 = 2 ≡ 5(mod 7)</span> <span class="math inline">2<sup>6</sup> = 2<sup>5</sup> × 2 ≡ 32 × 2 = 2 ≡ 10(mod 7)</span> <span class="math inline">2<sup>7</sup> = 2<sup>6</sup> × 2 ≡ 64 × 2 = 2 ≡ 9(mod 7)</span> <span class="math inline">2<sup>8</sup> = 2<sup>7</sup> × 2 ≡ 128 × 2 = 2 ≡ 7(mod 7)</span> <span class="math inline">2<sup>9</sup> = 2<sup>8</sup> × 2 ≡ 256 × 2 = 2 ≡ 3(mod 7)</span> <span class="math inline">2<sup>10</sup> = 2<sup>9</sup> × 2 ≡ 512 × 2 = 2 ≡ 6(mod 7)</span> <span class="math inline">2<sup>11</sup> = 2<sup>10</sup> × 2 ≡ 1024 × 2 = 2 ≡ 1(mod 7)</span> Because the remainders in the period form a rearrangement of all nonzero remainders modulu 11, this implies that 2 is a primitive root of modulo 11.</p></li>
+<li>The math looked complicated plus its mod q which is 11 so brute forcing should be easier than trying to calculate a way to solve for <span class="math inline"><em>X</em><sub><em>A</em></sub></span> I wrote a simple script:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">def</span> DerivePrivateKey(q, a, Y):</a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="co"># Brute Force Baby</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>): <span class="co">#I figure since its mod 11 i dont need to go that high.</span></a>
+<a class="sourceLine" id="cb1-4" title="4">        <span class="cf">if</span> a<span class="op">**</span>i <span class="op">%</span>q <span class="op">==</span> Y:</a>
+<a class="sourceLine" id="cb1-5" title="5">            <span class="cf">return</span> i</a></code></pre></div>
+<p><span class="math inline"><em>X</em><sub><em>A</em></sub></span> = 6</p>
+<ol start="6" type="A">
+<li>Using the previous answer for <span class="math inline"><em>X</em><sub><em>A</em></sub></span> I used the Shared Secret key formula: <br /><span class="math display"><em>K</em> = <em>Y</em><sub><em>b</em></sub><sup><em>X</em><sub><em>a</em></sub></sup>mod <em>q</em></span><br /></li>
+</ol>
+<p>K = 3</p>
+<ol start="7" type="A">
+<li><p>The Diffie-Hellman is made such that if both public keys are derived, the messages would still remain fully encrypted. Though it is possible for the attack E to know K but to do so they would need to brute force q by creating a list of prime numbers, then test each prime number with each primitive root. This would be computationally impossible, within a human lifetime, to calculate if q is a large number.</p></li>
+<li><p>If the attacker has both public keys, the attacker is able to calculate their own Shared secret keys and forward that information to both parties (A and B). This allows the attack to intercept messages between two parties unknowingly which is referred to as a Man-in-The-Middle attack. Therefore, if an attack has both public keys they can launch a MITM attack. ## Problem 4</p></li>
+<li><p>No, there could be an H(x) such that <span class="math inline"><em>H</em>(<em>x</em>) = <em>H</em>(<em>x</em>′)</span> but to find such a pair would be computationally infeasible. Though it is collision-resistant collisions still occur but it is very difficult to find.</p></li>
+<li><p>Weak collision resistance is made through a one-way function and made such that a given message <span class="math inline"><em>x</em><sub>1</sub></span> it is hard to find a second message <span class="math inline"><em>x</em><sub>2</sub> ≠ <em>x</em><sub>1</sub></span> with <span class="math inline"><em>H</em>(<em>x</em><sub>1</sub>) = <em>H</em>(<em>x</em><sub>2</sub>)</span>. The hash is made to be as complex as possible which can be somewhat taxing on the system. Strong collision resistance takes less time to produce than weak collision resistance, it also ensures that obvious hash collisions do not exist. this makes Strong Collision resistance faster and better than weak collision resistance.</p></li>
+<li></li>
+</ol>
+<h2 id="problem-5">Problem 5</h2>
+<ol type="A">
+<li>Assume an array of sixteen 64-bit words W[0], …, W[15], which will be treated as a circular queue. Define MASK as 00000000F in hex and round for t: $ s = t^{MASK}; $ if <span class="math inline">(<em>t</em> ≤ 16)</span> then <span class="math inline"><em>W</em><sub><em>s</em></sub> = <em>W</em><sub><em>s</em></sub> ⊕ <em>σ</em><sub>0</sub>(<em>W</em><sub>(<em>s</em> + 1)<sup><em>M</em><em>A</em><em>S</em><em>K</em></sup></sub>) ⊕ <em>W</em><sub>(<em>s</em> + 9)<sup><em>M</em><em>A</em><em>S</em><em>K</em></sup></sub> ⊕ <em>σ</em><sub>1</sub>(<em>W</em><sub>(<em>s</em> + 14)<sup><em>M</em><em>A</em><em>S</em><em>K</em></sup></sub>)</span></li>
+</ol>
+<p>I also wrote a computer program in python that was a lot longer.</p>
+<ol start="2" type="A">
+<li>Because t is larger than 15 we know that the 16 buffer is already created so these <span class="math inline"><em>W</em><sub><em>t</em></sub></span> can be calculated using the equation <br /><span class="math display"><em>W</em><sub><em>t</em></sub> = <em>σ</em><sub>1</sub><sup>512</sup>(<em>W</em><sub><em>t</em> − 2</sub>) + <em>W</em><sub><em>t</em> − 7</sub> + <em>σ</em><sub>0</sub><sup>512</sup>(<em>W</em><sub><em>t</em> − 15</sub>) + <em>W</em><sub><em>t</em> − 16</sub></span><br /> <span class="math inline"><em>W</em><sub>16</sub> = <em>σ</em><sub>1</sub><sup>512</sup>(<em>W</em><sub>14</sub>) + <em>W</em><sub>9</sub> + <em>σ</em><sub>0</sub><sup>512</sup>(<em>W</em><sub>1</sub>) + <em>W</em><sub>0</sub></span> <span class="math inline"><em>W</em><sub>17</sub> = <em>σ</em><sub>1</sub><sup>512</sup>(<em>W</em><sub>15</sub>) + <em>W</em><sub>10</sub> + <em>σ</em><sub>0</sub><sup>512</sup>(<em>W</em><sub>2</sub>) + <em>W</em><sub>1</sub></span> <span class="math inline"><em>W</em><sub>18</sub> = <em>σ</em><sub>1</sub><sup>512</sup>(<em>W</em><sub>16</sub>) + <em>W</em><sub>11</sub> + <em>σ</em><sub>0</sub><sup>512</sup>(<em>W</em><sub>3</sub>) + <em>W</em><sub>2</sub></span> <span class="math inline"><em>W</em><sub>19</sub> = <em>σ</em><sub>1</sub><sup>512</sup>(<em>W</em><sub>17</sub>) + <em>W</em><sub>12</sub> + <em>σ</em><sub>0</sub><sup>512</sup>(<em>W</em><sub>4</sub>) + <em>W</em><sub>3</sub></span></li>
+</ol>
+<h2 id="problem-6">Problem 6</h2>
+<ol type="A">
+<li></li>
+<li></li>
+</ol>
+<p>For one-block message, the MAC using CBC-MAC is T=MAC(K,X) where X is a message and K is a secret key. As for the two-block message in which the first block X and the second block <span class="math inline"><em>X</em> ⊕ <em>T</em></span>. Therefore the MAC is given by: <br /><span class="math display"><em>E</em>(<em>K</em>(<em>T</em> ⊕ (<em>X</em> ⊕ <em>T</em>))) = <em>E</em>(<em>K</em>, <em>X</em>) = <em>T</em></span><br /></p>
+<figure>
+<img src="Problem6b.png" alt="Problem6b" /><figcaption>Problem6b</figcaption>
+</figure>
